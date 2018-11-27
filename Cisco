@@ -1,1 +1,10 @@
 Cisco
+secret password :
+enable
+enable secret
+privilage
+service password-encryption
+ip address:
+Step 2	ip address ip-address mask Example: Router(config-int)# ip address 192.168.12.2 255.255.255.0 Router(config-int)#
+Step 3	no shutdown Example: Router(config-int)# no shutdown Router(config-int)#
+Step 4	exit Example: Router(config-int)# exit Router(config)#
