@@ -1,0 +1,20 @@
+#Windows
+#pwd
+#C:\Users\Lt Serafin\Documnets\
+#absolute
+#C:\Users\Lt Serafin\Documnets\Videos\Cyber
+#Relative
+#.\Videos\Cyber
+#
+#---Creating a new user---
+#Storing the password for the new user in a temporary string
+$Password = Read-Host -AsSecureString
+
+#Creating a new user
+New-LocalUser "NEW_ACCOUNT_NAME" -Password $Password -FullName "USER_FULL_NAME" -Description "This is a standard user account."
+
+#To add a user to a specific group
+Add-LocalGroupMember -Group "Administrators" -Member "NEW_ACCOUNT_NAME"
+
+#---Deleting a user---
+
