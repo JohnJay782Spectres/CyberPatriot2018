@@ -2,7 +2,7 @@
 
 #Basic Commands
 
-# cd : This command is used to change directories, it needs the relative path of the directory you are trying to access, thou you
+# cd : This command is used to change directories, it needs the relative path of the directory you are trying to access, though you
 # can also place the absolute path to change into any directory as long as you know the absolute path to the directory.
 # Example: cd /Documents/ScienceFair 
 # The example shown would access the directory called "ScienceFair" assuming you are in a directory that contains the "sub directory" 
@@ -10,5 +10,22 @@
 #Example: cd ~/Documents/ScienceFair
 # In order to change back to home directory all you need to do is run (cd) without any modifiers 
 
-# ls : This commannd lists the contents of the current directory if no modifiers or relative paths are added.  
+# ls : This commannd lists the contents of the current directory if no modifiers or relative paths are added. But this command can
+# have modifiers such as (-a), which is a short for "all", this modifer will lists more information of the files contained, very useful 
+# for forensic work. This command can also have relative and absolute paths in order to list files that are not in your working directory
+#( btw a working directory is simply the directory you are in).
+#Example: ls -a /Downloads/LinuxOS/Debian
+#This example uses the -a(all) modifier and the relative path of the working directory, but it is useful to know that just 
+#using ls in a working directory does print just the contents in it with minimal information and absolute paths can also be used.\\
+
+#nano : This command accesses the nano text editor( allows you to access and modifi text files)
+Example: nano hello.txt
+# opens the hello.txt 
+
+# man : opens the manual for a given command
+Example: man cd
+# this opens the manual page for the command cd
+
+
+# Complex Commands
 
