@@ -17,4 +17,6 @@ New-LocalUser "NEW_ACCOUNT_NAME" -Password $Password -FullName "USER_FULL_NAME" 
 Add-LocalGroupMember -Group "Administrators" -Member "NEW_ACCOUNT_NAME"
 
 #---Deleting a user---
+Remove-LocalUser -Name "USER_ACCOUNT_NAME"
 
+#
