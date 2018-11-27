@@ -1,1 +1,14 @@
-#Linux
+#Linux Commands File
+
+#Basic Commands
+
+# cd : This command is used to change directories, it needs the relative path of the directory you are trying to access, thou you
+# can also place the absolute path to change into any directory as long as you know the absolute path to the directory.
+# Example: cd /Documents/ScienceFair 
+# The example shown would access the directory called "ScienceFair" assuming you are in a directory that contains the "sub directory" 
+# called "Science Fair", this is a relative path to your working directory. A absolute path would be from your root directory(~ in linux).
+#Example: cd ~/Documents/ScienceFair
+# In order to change back to home directory all you need to do is run (cd) without any modifiers 
+
+# ls : This commannd lists the contents of the current directory if no modifiers or relative paths are added.  
+
