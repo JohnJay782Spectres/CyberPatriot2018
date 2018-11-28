@@ -25,6 +25,7 @@ OR the full command is ParkRouter# copy startup-config running-config
 ~~~~~~~~~~~~~~~~~~~~~
 | Enabling Password |
 ~~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
 ParkRouter>enable
 ParkRouter#configure terminal
 ParkRouter(config)#enable password Cisco123
@@ -32,6 +33,7 @@ ParkRouter(config)#enable password Cisco123
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Enabling Secret Password |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
 ParkRouter>enable
 ParkRouter#configure terminal
 ParkRouter(config)#enable secret Cisco123
@@ -43,7 +45,6 @@ ParkRouter#show running-config
 | Setting up IP Addresses |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swipaddr.html#wp1037806
-
 ParkRouter#confiure terminal
 ParkRouter(config)#interface vlan XX
 ParkRouter(config-if)#ip address <ip address> <subnet mask>
@@ -79,7 +80,6 @@ https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switche
 https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1200245
 https://www.youtube.com/watch?v=Wi48h6UFhlo
 Trunking is a way for 2 or more switches to pass long data on different vlans without having seperate dedicated lines(interfaces) for each vlan. The data on each vlan still stays inside its assigned vlan. 
-
 ParkRouter>enable
 Password:
 ParkRouter#configure terminal
@@ -93,8 +93,38 @@ ParkRouter(config-if)#switchport trunk allowed vlan add 10
 OR
 ParkRouter(config-if)#switchport trunk allowed vlan remove 20
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Setting up Telnet with a password |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1020691
+Telnet is an UNSECURE way to access a Router/Switch
+ParkRouter>enable
+ParkRouter#configure terminal
+ParkRouter(config)#line vty 0 4
+ParkRouter(config-line)# transport input telnet
+ParkRouter(config)#password Cisco123
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Configuring Username and Password Pairs |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1046352
+ParkRouter#configure terminal
+ParkRouter(config)#username JohnJay privilege 15 password 7 Cisco123
+ParkRouter(config)#line vty 0 4
+ParkRouter(config)#login local
+ParkRouter(config)#end
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Setting up Secure Shell |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1227177
+ParkRouter#configure terminal
+ParkRouter(config)#line vty 0 4
+ParkRouter(config-line)# transport input ssh
+
+----To disable all forms of remote access (Telnet and SSH)----
+ParkRouter(config)# line vty 0 4
+ParkRouter(config-line)# transport input none
 
 
 
