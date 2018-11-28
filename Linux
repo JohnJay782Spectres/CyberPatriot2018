@@ -11,12 +11,12 @@
 # In order to change back to home directory all you need to do is run (cd) without any modifiers 
 
 # ls : This commannd lists the contents of the current directory if no modifiers or relative paths are added. But this command can
-# have modifiers such as (-a), which is a short for "all", this modifer will lists more information of the files contained, very useful 
-# for forensic work. This command can also have relative and absolute paths in order to list files that are not in your working directory
-#( btw a working directory is simply the directory you are in).
+# have modifiers such as (-a, or -l), which is a short for "all"(-l simply shows this in a column), this modifer will lists more information 
+# of the files contained, very useful for forensic work. This command can also have relative and absolute paths in order to list files
+# that are not in your working directory (btw a working directory is simply the directory you are in).
 #Example: ls -a /Downloads/LinuxOS/Debian
 #This example uses the -a(all) modifier and the relative path of the working directory, but it is useful to know that just 
-#using ls in a working directory does print just the contents in it with minimal information and absolute paths can also be used.\\
+#using ls in a working directory does print just the contents in it with minimal information and absolute paths can also be used.
 
 #nano : This command accesses the nano text editor( allows you to access and modifi text files)
 Example: nano hello.txt
@@ -26,6 +26,31 @@ Example: nano hello.txt
 Example: man cd
 # this opens the manual page for the command cd
 
+# pwd : (print working directory) This command prints the directory you are in ( usefull if you get lost)
+#Example: pwd 
+# Prints the working directory
+
+# touch : Creates a completely empty file (can be used to also create files with extensions such as .txt)
+Example: touch test6
+#This example creates an empty file
+Example: touch test6.txt
+#Creates a txt file named test6.txt
+#( if you use the touch command on an existing file you can change the creation/modification time to the time you used touch on the file)
+#( also useful for scripting)
+
+# nano : 
+
 
 # Complex Commands
+
+# chmod : this command changes the user's,group and worldpermissions of a file or directory.
+#Example: chmod 0755 /Commandtest
+# This command changes gives the owner of the file read,write, and execute capabilities( the Second digit), gives
+# read and write to the group (the Third digit) and read only for the rest("world", only read capabilities).
+# this example uses numeric permissions
+
+#
+
+
+
 
