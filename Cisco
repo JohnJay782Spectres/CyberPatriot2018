@@ -1,4 +1,54 @@
-Cisco
+Cisco Reference
+~~~~~~~~~~~~~~~~~~
+| Check Settings |
+~~~~~~~~~~~~~~~~~~
+ParkRouter#show running-config
+
+~~~~~~~~~~~~~~~~~~~~~~~
+| Save Cisco Settings |
+~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter#copy start run
+
+OR the full command is ParkRouter# copy startup-config running-config
+
+~~~~~~~~~~~~~~~~~~~~~
+| Enabling Password |
+~~~~~~~~~~~~~~~~~~~~~
+ParkRouter>enable
+ParkRouter#configure terminal
+ParkRouter(config)#enable password Cisco123
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Enabling Secret Password |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter>enable
+ParkRouter#configure terminal
+ParkRouter(config)#enable secret Cisco123
+
+To see if the password is enabled correctly run the command:
+ParkRouter#show running-config
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Trunking/Encapsulation |
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/10599-88.html
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1200245
+Trunking is a way for 2 or more switches to pass long data on different vlans without having seperate dedicated lines(interfaces) for each vlan. The data on each vlan still stays inside that vlan. 
+
+ParkRouter>enable
+Password:
+ParkRouter#configure terminal
+ParkRouter(config)#interface fa0/XX
+ParkRouter(config-if)#switchport trunk encapsulation dot1q
+ParkRouter(config-if)#switchport mode trunk
+
+----Defining the Allowed VLANs on a Trunk----
+ParkRouter(config-if)#switchport trunk allowed vlan add 10
+OR
+ParkRouter(config-if)#switchport trunk allowed vlan remove 20
+
+
+
 secret password :
 enable
 enable secret
