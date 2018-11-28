@@ -28,6 +28,18 @@ ParkRouter(config)#enable secret Cisco123
 To see if the password is enabled correctly run the command:
 ParkRouter#show running-config
 
+~~~~~~~~~~~~~~~~~~~~
+| Setting up VLANs |
+~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1111866
+ParkRouter>enable
+Password:
+ParkRouter#configure terminal
+ParkRouter(config)#vlan 10
+ParkRouter(config-vlan)#name Marketing10
+ParkRouter(config-vlan)#end
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Trunking/Encapsulation |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,6 +53,7 @@ ParkRouter#configure terminal
 ParkRouter(config)#interface fa0/XX
 ParkRouter(config-if)#switchport trunk encapsulation dot1q
 ParkRouter(config-if)#switchport mode trunk
+ParkRouter(config-if)#end
 
 ----Defining the Allowed VLANs on a Trunk----
 ParkRouter(config-if)#switchport trunk allowed vlan add 10
