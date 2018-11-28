@@ -1,4 +1,15 @@
 Cisco Reference
+Basic information on using Router/Switch command line interface (CLI)
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swcli.html
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+| Setting up a Hostname |
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Router>enable
+Router#configure terminal
+Router(config)#hostname ParkRouter
+ParkRouter(config)#
+
 ~~~~~~~~~~~~~~~~~~
 | Check Settings |
 ~~~~~~~~~~~~~~~~~~
@@ -28,6 +39,20 @@ ParkRouter(config)#enable secret Cisco123
 To see if the password is enabled correctly run the command:
 ParkRouter#show running-config
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Setting up IP Addresses |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swipaddr.html#wp1037806
+
+ParkRouter#confiure terminal
+ParkRouter(config)#interface vlan XX
+ParkRouter(config-if)#ip address <ip address> <subnet mask>
+ParkRouter(config-if)#exit
+ParkRouter(config)#ip default-gateway <ip address>
+ParkRouter(config)#end
+ParkRouter#show interfaces vlan XX    !--Verify the configured IP address
+ParkRouter#show ip redirects          !--Verify the configured default gateway
+
 ~~~~~~~~~~~~~~~~~~~~
 | Setting up VLANs |
 ~~~~~~~~~~~~~~~~~~~~
@@ -35,17 +60,25 @@ https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release
 ParkRouter>enable
 Password:
 ParkRouter#configure terminal
-ParkRouter(config)#vlan 10
-ParkRouter(config-vlan)#name Marketing10
+ParkRouter(config)#vlan XX
+ParkRouter(config-vlan)#name Marketing
 ParkRouter(config-vlan)#end
 
+----Assigning a VLAN to a port----
+ParkRouter(config)#interface fa0/XX
+ParkRouter(config-if)#switchport mode access
+ParkRouter(config-if)#switchport access vlan XX
+
+----Display all VLANs----
+ParkRouter#show vlan
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Trunking/Encapsulation |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/10599-88.html
 https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1200245
-Trunking is a way for 2 or more switches to pass long data on different vlans without having seperate dedicated lines(interfaces) for each vlan. The data on each vlan still stays inside that vlan. 
+https://www.youtube.com/watch?v=Wi48h6UFhlo
+Trunking is a way for 2 or more switches to pass long data on different vlans without having seperate dedicated lines(interfaces) for each vlan. The data on each vlan still stays inside its assigned vlan. 
 
 ParkRouter>enable
 Password:
@@ -62,6 +95,27 @@ ParkRouter(config-if)#switchport trunk allowed vlan remove 20
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----Jesse's--------
 secret password :
 enable
 enable secret
