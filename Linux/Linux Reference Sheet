@@ -40,20 +40,20 @@ Example: touch test6.txt
 #( also useful for scripting)
 
 #~~~~~~~~~~~~~~~~~~~~
-#| Complex Commands |
+#| File Permissions |
 #~~~~~~~~~~~~~~~~~~~~
+#https://www.pluralsight.com/blog/it-ops/linux-file-permissions
 # chmod : this command changes the user's,group and worldpermissions of a file or directory.
 #Example: chmod 0755 /Commandtest
 # This command changes gives the owner of the file read,write, and execute capabilities( the Second digit), gives
 # read and write to the group (the Third digit) and read only for the rest("world", only read capabilities).
 # this example uses numeric permissions
 
-
 #~~~~~~~~~~~~~~~~
 #| Adding Users |
 #~~~~~~~~~~~~~~~~
-https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
-https://ss64.com/bash/useradd.html
+#https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+#https://ss64.com/bash/useradd.html
 #By default accounts are created with no password and locked. To unlock the account use the "passwd" command to give it a password.
 sudo useradd JohnJay
 sudo passwd JohnJay
@@ -61,15 +61,15 @@ sudo passwd JohnJay
 #~~~~~~~~~~~~~~~~~~
 #| Deleting Users |
 #~~~~~~~~~~~~~~~~~~
-https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
-https://ss64.com/bash/userdel.html
+#https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+#https://ss64.com/bash/userdel.html
 sudo userdel JohnJay
 #To forcefully remove a user along with all of their files use "sudo userdel -f JohnJay"
 
 #~~~~~~~~~~~~~~~~~~~~~~~
 #| Lock a user account |
 #~~~~~~~~~~~~~~~~~~~~~~~
-https://www.tecmint.com/usermod-command-examples/
+#https://www.tecmint.com/usermod-command-examples/
 #You can lock an account several ways
 #1) Disable the login with the passwd command
 sudo passwd -L JohnJay
@@ -112,8 +112,44 @@ sudo dpkg --get-selections
 #Look for a particular package
 sudo dpkg-query -l '*wireshark*'
 
+#~~~~~~~~~~~~~~~~~~~~~
+#| Password Policies |
+#~~~~~~~~~~~~~~~~~~~~~
+#https://www.ostechnix.com/how-to-set-password-policies-in-linux/
+#Follow the DEB based system instructions
 
+#Set password history and minimum length
+sudo nano /etc/pam.d/common-password
+#Change the following line:
+#password [success=2 default=ignore] pam_unix.so obscure sha512
+#To:
+#password [success=2 default=ignore] pam_unix.so obscure sha512 minlen=8 remember=5
 
+#Set password complexity
+sudo apt-get install libpam-pwquality
+sudo nano /etc/pam.d/common-password
+#Change the following line:
+#password        requisite                       pam_pwquality.so
+#To:
+#password        requisite                       pam_pwquality.so retry=3 ucredit=-1 dcredit=-1 ocredit=-1
+
+#Set password expiration for all users
+sudo nano /etc/login.defs
+#Change the following line:
+#PASS_MAX_DAYS 100
+#PASS_MIN_DAYS 0
+#PASS_WARN_AGE 7
+#To:
+#PASS_MAX_DAYS 90
+#PASS_MIN_DAYS 10
+#PASS_WARN_AGE 7
+
+#Display the password for the exisiting user
+sudo chage -l JohnJay
+
+#Set password expiration for a particular user
+#https://linux.die.net/man/1/chage
+sudo chage -m 10 -M 90 -W 7 JohnJay
 
 
 
