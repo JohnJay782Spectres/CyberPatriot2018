@@ -5,6 +5,12 @@ Set Password Policies
 Turn off FTP
 Remove hacking tools
 Remove media file
+->Look for these types of files
+->Audio
+-->*.3ga *.aac *.aiff *.amr *.ape *.arf *.asf *.asx *.cda *.dvf *.flac *.gp4 *.gp5 *.gpx *.logic *.m4a *.m4b *.m4p *.midi *.mp3 *.pcm *.rec *.snd *.sng *.uax *.wav *.wma *.wpl *.zab
+->Video
+-->*.mkv *.webm *.flv *.vob *.ogv *.drc *.gifv *.mng *.avi$ *.mov *.qt *.wmv *.yuv *.rm *.rmvb *.asf *.amv *.mp4$ *.m4v *.mp *.m?v *.svi *.3gp *.flv *.f4v
+Remove games
 Update all programs
 Turn on Firewall
 Update Firewall
