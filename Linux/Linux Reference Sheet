@@ -1,7 +1,8 @@
 #Linux Commands File (Ubuntu, though a lot of these commands can also be used for Debian)
 
-#Basic Commands
-
+#~~~~~~~~~~~~~~~~~~
+#| Basic Commands |
+#~~~~~~~~~~~~~~~~~~
 # cd : This command is used to change directories, it needs the relative path of the directory you are trying to access, though you
 # can also place the absolute path to change into any directory as long as you know the absolute path to the directory.
 # Example: cd /Documents/ScienceFair 
@@ -18,9 +19,9 @@
 #This example uses the -a(all) modifier and the relative path of the working directory, but it is useful to know that just 
 #using ls in a working directory does print just the contents in it with minimal information and absolute paths can also be used.
 
-#nano : This command accesses the nano text editor( allows you to access and modifi text files)
-Example: nano hello.txt
-# opens the hello.txt 
+#nano : This command accesses the nano text editor( allows you to access and modify files)
+Example: nano etc/passwd
+# opens the passwd file 
 
 # man : opens the manual for a given command
 Example: man cd
@@ -38,16 +39,16 @@ Example: touch test6.txt
 #( if you use the touch command on an existing file you can change the creation/modification time to the time you used touch on the file)
 #( also useful for scripting)
 
-# nano : 
-
-
-# Complex Commands
-
+#~~~~~~~~~~~~~~~~~~~~
+#| Complex Commands |
+#~~~~~~~~~~~~~~~~~~~~
 # chmod : this command changes the user's,group and worldpermissions of a file or directory.
 #Example: chmod 0755 /Commandtest
 # This command changes gives the owner of the file read,write, and execute capabilities( the Second digit), gives
 # read and write to the group (the Third digit) and read only for the rest("world", only read capabilities).
 # this example uses numeric permissions
+
+
 #~~~~~~~~~~~~~~~~
 #| Adding Users |
 #~~~~~~~~~~~~~~~~
@@ -64,7 +65,9 @@ https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-
 #sudo visudo
 #root    ALL=(ALL:ALL) ALL
 
+#~~~~~~~~~~~~~~~~~~
 #| Deleting Users |
+#~~~~~~~~~~~~~~~~~~
 https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
 
 #deluser
