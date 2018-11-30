@@ -1,7 +1,8 @@
 #Linux Commands File (Ubuntu, though a lot of these commands can also be used for Debian)
 
-#Basic Commands
-
+#~~~~~~~~~~~~~~~~~~
+#| Basic Commands |
+#~~~~~~~~~~~~~~~~~~
 # cd : This command is used to change directories, it needs the relative path of the directory you are trying to access, though you
 # can also place the absolute path to change into any directory as long as you know the absolute path to the directory.
 # Example: cd /Documents/ScienceFair 
@@ -18,9 +19,9 @@
 #This example uses the -a(all) modifier and the relative path of the working directory, but it is useful to know that just 
 #using ls in a working directory does print just the contents in it with minimal information and absolute paths can also be used.
 
-#nano : This command accesses the nano text editor( allows you to access and modifi text files)
-Example: nano hello.txt
-# opens the hello.txt 
+#nano : This command accesses the nano text editor( allows you to access and modify files)
+Example: nano etc/passwd
+# opens the passwd file 
 
 # man : opens the manual for a given command
 Example: man cd
@@ -38,58 +39,117 @@ Example: touch test6.txt
 #( if you use the touch command on an existing file you can change the creation/modification time to the time you used touch on the file)
 #( also useful for scripting)
 
-# nano : 
-
-
-# Complex Commands
-
+#~~~~~~~~~~~~~~~~~~~~
+#| File Permissions |
+#~~~~~~~~~~~~~~~~~~~~
+#https://www.pluralsight.com/blog/it-ops/linux-file-permissions
 # chmod : this command changes the user's,group and worldpermissions of a file or directory.
 #Example: chmod 0755 /Commandtest
 # This command changes gives the owner of the file read,write, and execute capabilities( the Second digit), gives
 # read and write to the group (the Third digit) and read only for the rest("world", only read capabilities).
 # this example uses numeric permissions
+
 #~~~~~~~~~~~~~~~~
 #| Adding Users |
 #~~~~~~~~~~~~~~~~
-https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+#https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+#https://ss64.com/bash/useradd.html
+#By default accounts are created with no password and locked. To unlock the account use the "passwd" command to give it a password.
+sudo useradd JohnJay
+sudo passwd JohnJay
 
-#adduser 
-#sudo adduser
-#groups
-#newuser :
-#usermod -aG sudo
-#some_command
-#sudo some_command
-#visudo
-#sudo visudo
-#root    ALL=(ALL:ALL) ALL
-
+#~~~~~~~~~~~~~~~~~~
 #| Deleting Users |
-https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+#~~~~~~~~~~~~~~~~~~
+#https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+#https://ss64.com/bash/userdel.html
+sudo userdel JohnJay
+#To forcefully remove a user along with all of their files use "sudo userdel -f JohnJay"
 
-#deluser
-#sudo deluser
-#deluser --remove-home
-#sudo deluser --remove-home
-#visudo
-#sudo visudo
-#root    ALL=(ALL:ALL) ALL
-#newuser ALL=(ALL:ALL) ALL   # DELETE THIS LINE
-
-
-
-
-
-
-
-
-
+#~~~~~~~~~~~~~~~~~~~~~~~
+#| Lock a user account |
+#~~~~~~~~~~~~~~~~~~~~~~~
+#https://www.tecmint.com/usermod-command-examples/
+#You can lock an account several ways
+#1) Disable the login with the passwd command
+sudo passwd -L JohnJay
+#2) Lock the password
+sudo usermod -p '!' JohnJay
+#3) Disable the users ability to use the shell
+usermod -s /sbin/nologin JohnJay        --For Debian use /usr/sbin/nologin
 
 
+#~~~~~~~~~~~~~~~~~~~~~~~
+#| Disable root access |
+#~~~~~~~~~~~~~~~~~~~~~~~
+#You can lock an account several ways
+#1) Disable the login with the passwd command
+sudo passwd -L root
+#2) Lock the password
+sudo usermod -p '!' root
+#3) Disable the users ability to use the shell
+usermod -s /sbin/nologin root        --For Debian use /usr/sbin/nologin
+#4)Disable root SSH logins
+sudo nano /etc/ssh/sshd_config
+#Change the line that reads: #PermitRootLogin yes
+#To read: PermitRootLogin no
+#Restart SSH
+sudo sytemctl restart ssh
 
+#~~~~~~~~~~~~
+#| Packages |
+#~~~~~~~~~~~~
+#Update all packages(programs)
+sudo aptitude full-upgrade
 
+#Remove a package(program)
+sudo apt-get remove ftpd
+#Auto remove helps to delete dependencies
+sudo apt-get remove wireshark --auto-remove
 
+#See all the installed packages
+sudo dpkg --get-selections
+#Look for a particular package
+sudo dpkg-query -l '*wireshark*'
 
+#~~~~~~~~~~~~~~~~~~~~~
+#| Password Policies |
+#~~~~~~~~~~~~~~~~~~~~~
+#https://www.ostechnix.com/how-to-set-password-policies-in-linux/
+#Follow the DEB based system instructions
+
+#Set password history and minimum length
+sudo nano /etc/pam.d/common-password
+#Change the following line:
+#password [success=2 default=ignore] pam_unix.so obscure sha512
+#To:
+#password [success=2 default=ignore] pam_unix.so obscure sha512 minlen=8 remember=5
+
+#Set password complexity
+sudo apt-get install libpam-pwquality
+sudo nano /etc/pam.d/common-password
+#Change the following line:
+#password        requisite                       pam_pwquality.so
+#To:
+#password        requisite                       pam_pwquality.so retry=3 ucredit=-1 dcredit=-1 ocredit=-1
+
+#Set password expiration for all users
+sudo nano /etc/login.defs
+#Change the following line:
+#PASS_MAX_DAYS 100
+#PASS_MIN_DAYS 0
+#PASS_WARN_AGE 7
+#To:
+#PASS_MAX_DAYS 90
+#PASS_MIN_DAYS 10
+#PASS_WARN_AGE 7
+
+#Display the password for the exisiting user
+sudo chage -l JohnJay
+
+#Set password expiration for a particular user
+#https://linux.die.net/man/1/chage
+sudo chage -m 10 -M 90 -W 7 JohnJay
 
 
 
