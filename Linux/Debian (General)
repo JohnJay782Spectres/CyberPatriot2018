@@ -1,0 +1,18 @@
+adduser
+sudo adduser
+Adding user `sammy' ...
+Adding new group `sammy' (1001) ...
+Adding new user `sammy' (1001) with group `sammy' ...
+Creating home directory `/home/<^>sammy' ...
+Copying files from `/etc/skel' ...
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+Changing the user information for sammy
+Enter the new value, or press ENTER for the default
+        Full Name []: Sammy the Shark
+        Room Number []: 123
+        Work Phone []: 555-555-5555
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y

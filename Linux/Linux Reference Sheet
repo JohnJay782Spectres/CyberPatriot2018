@@ -48,8 +48,55 @@ Example: touch test6.txt
 # This command changes gives the owner of the file read,write, and execute capabilities( the Second digit), gives
 # read and write to the group (the Third digit) and read only for the rest("world", only read capabilities).
 # this example uses numeric permissions
+#~~~~~~~~~~~~~~~~
+#| Adding Users |
+#~~~~~~~~~~~~~~~~
+https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
 
-#
+#adduser 
+#sudo adduser
+#groups
+#newuser :
+#usermod -aG sudo
+#some_command
+#sudo some_command
+#visudo
+#sudo visudo
+#root    ALL=(ALL:ALL) ALL
+
+#| Deleting Users |
+https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+
+#deluser
+#sudo deluser
+#deluser --remove-home
+#sudo deluser --remove-home
+#visudo
+#sudo visudo
+#root    ALL=(ALL:ALL) ALL
+#newuser ALL=(ALL:ALL) ALL   # DELETE THIS LINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
