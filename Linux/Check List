@@ -15,3 +15,5 @@ disable/lock root access
 Know how to get the user id
 Know how to see the user rights of a file e.g. chmod, ls -la
 Know the difference between absolute and relative file path
+Change the ssh port to 22222
+Disable guest
