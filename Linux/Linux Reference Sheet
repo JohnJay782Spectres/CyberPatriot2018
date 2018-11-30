@@ -66,25 +66,44 @@ https://ss64.com/bash/userdel.html
 sudo userdel JohnJay
 #To forcefully remove a user along with all of their files use "sudo userdel -f JohnJay"
 
-#~~~~~~~~~~~~~~~
-#| Lock a User |
-#~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~
+#| Lock a user account |
+#~~~~~~~~~~~~~~~~~~~~~~~
+https://www.tecmint.com/usermod-command-examples/
+#You can lock an account several ways
+#1) Disable the login with the passwd command
+sudo passwd -L JohnJay
+#2) Lock the password
+sudo usermod -p '!' JohnJay
+#3) Disable the users ability to use the shell
+usermod -s /sbin/nologin JohnJay        --For Debian use /usr/sbin/nologin
 
 
+#~~~~~~~~~~~~~~~~~~~~~~~
+#| Disable root access |
+#~~~~~~~~~~~~~~~~~~~~~~~
+#You can lock an account several ways
+#1) Disable the login with the passwd command
+sudo passwd -L root
+#2) Lock the password
+sudo usermod -p '!' root
+#3) Disable the users ability to use the shell
+usermod -s /sbin/nologin root        --For Debian use /usr/sbin/nologin
+#4)Disable root SSH logins
+sudo nano /etc/ssh/sshd_config
+#Change the line that reads: #PermitRootLogin yes
+#To read: PermitRootLogin no
+#Restart SSH
+sudo sytemctl restart ssh
 
+#~~~~~~~~~~~~
+#| Packages |
+#~~~~~~~~~~~~
+#Update all packages(programs)
+sudo aptitude full-upgrade
 
-
-
-
-
-
-
-
-
-
-
-
-
+#Remove a package(program)
+sudo apt-get remove ftpd
 
 
 
