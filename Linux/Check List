@@ -4,8 +4,14 @@ Make sure everyone has a STRONG password
 Set Password Policies
 Turn off FTP
 Remove hacking tools
+->Common "hacking" tools
+->Wireshark, nmap, zenmap, oshcrack, jack the ripper,
 Remove media file
+Remove games
 Update all programs
 Turn on Firewall
 Update Firewall
 disable/lock root access
+Know how to get the user id
+Know how to see the user rights of a file e.g. chmod, ls -la
+Know the difference between absolute and relative file path
