@@ -10,4 +10,5 @@ Turn on Firewall
 Update Firewall
 disable remote desktop
 disable ctrl-alt-del
+Disable the Guest and Administrator accounts
 Rename the Guest and Administrator accounts
