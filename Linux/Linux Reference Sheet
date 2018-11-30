@@ -104,6 +104,16 @@ sudo aptitude full-upgrade
 
 #Remove a package(program)
 sudo apt-get remove ftpd
+#Auto remove helps to delete dependencies
+sudo apt-get remove wireshark --auto-remove
+
+#See all the installed packages
+sudo dpkg --get-selections
+#Look for a particular package
+sudo dpkg-query -l '*wireshark*'
+
+
+
 
 
 
