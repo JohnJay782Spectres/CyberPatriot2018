@@ -53,31 +53,23 @@ Example: touch test6.txt
 #| Adding Users |
 #~~~~~~~~~~~~~~~~
 https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
-
-#adduser 
-#sudo adduser
-#groups
-#newuser :
-#usermod -aG sudo
-#some_command
-#sudo some_command
-#visudo
-#sudo visudo
-#root    ALL=(ALL:ALL) ALL
+https://ss64.com/bash/useradd.html
+#By default accounts are created with no password and locked. To unlock the account use the "passwd" command to give it a password.
+sudo useradd JohnJay
+sudo passwd JohnJay
 
 #~~~~~~~~~~~~~~~~~~
 #| Deleting Users |
 #~~~~~~~~~~~~~~~~~~
 https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+https://ss64.com/bash/userdel.html
+sudo userdel JohnJay
+#To forcefully remove a user along with all of their files use "sudo userdel -f JohnJay"
 
-#deluser
-#sudo deluser
-#deluser --remove-home
-#sudo deluser --remove-home
-#visudo
-#sudo visudo
-#root    ALL=(ALL:ALL) ALL
-#newuser ALL=(ALL:ALL) ALL   # DELETE THIS LINE
+#~~~~~~~~~~~~~~~
+#| Lock a User |
+#~~~~~~~~~~~~~~~
+
 
 
 
