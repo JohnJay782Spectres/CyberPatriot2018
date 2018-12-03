@@ -26,6 +26,7 @@ OR the full command is ParkRouter# copy startup-config running-config
 | Enabling Password |
 ~~~~~~~~~~~~~~~~~~~~~
 https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
+The password will be stored in plaintext
 ParkRouter>enable
 ParkRouter#configure terminal
 ParkRouter(config)#enable password Cisco123
@@ -34,6 +35,7 @@ ParkRouter(config)#enable password Cisco123
 | Enabling Secret Password |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
+The password will be stored as a hash
 ParkRouter>enable
 ParkRouter#configure terminal
 ParkRouter(config)#enable secret Cisco123
