@@ -1,132 +1,177 @@
 Cisco Reference 
-Basic information on using Router/Switch command line interface (CLI)
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swcli.html
+Description: Basic information on using Router/Switch command line interface (CLI)
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swcli.html
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting up a Hostname |
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-Router>enable
-Router#configure terminal
-Router(config)#hostname ParkRouter
-ParkRouter(config)#
+Description:
+Source:
+Switch>enable
+Switch#configure terminal
+Switch(config)#hostname ParkRouter
+ParkSwitch(config)#
 
 ~~~~~~~~~~~~~~~~~~
 | Check Settings |
 ~~~~~~~~~~~~~~~~~~
-ParkRouter#show running-config
+Description:
+Source:
+ParkSwitch#show running-config
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 | Save Cisco Settings |
 ~~~~~~~~~~~~~~~~~~~~~~~
-ParkRouter#copy start run
-
+Description:
+Source:
+ParkSwitch#copy start run
 OR the full command is ParkRouter# copy startup-config running-config
 
 ~~~~~~~~~~~~~~~~~~~~~
 | Enabling Password |
 ~~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
-The password will be stored in plaintext
-ParkRouter>enable
-ParkRouter#configure terminal
-ParkRouter(config)#enable password Cisco123
+Description: The password will be stored in plaintext
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
+ParkSwitch>enable
+ParkSwitch#configure terminal
+ParkSwitch(config)#enable password Cisco123
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Enabling Secret Password |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
-The password will be stored as a hash
-ParkRouter>enable
-ParkRouter#configure terminal
-ParkRouter(config)#enable secret Cisco123
+Description: The password will be stored as a hash
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1154063
+ParkSwitch>enable
+ParkSwitch#configure terminal
+ParkSwitch(config)#enable secret Cisco123
 
 To see if the password is enabled correctly run the command:
-ParkRouter#show running-config
+ParkSwitch#show running-config
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting up IP Addresses |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swipaddr.html#wp1037806
-ParkRouter#confiure terminal
-ParkRouter(config)#interface vlan XX
-ParkRouter(config-if)#ip address <ip address> <subnet mask>
-ParkRouter(config-if)#exit
-ParkRouter(config)#ip default-gateway <ip address>
-ParkRouter(config)#end
-ParkRouter#show interfaces vlan XX    !--Verify the configured IP address
-ParkRouter#show ip redirects          !--Verify the configured default gateway
+Description:
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swipaddr.html#wp1037806
+ParkSwitch#confiure terminal
+ParkSwitch(config)#interface vlan XX
+ParkSwitch(config-if)#ip address <ip address> <subnet mask>
+ParkSwitch(config-if)#exit
+ParkSwitch(config)#ip default-gateway <ip address>
+ParkSwitch(config)#end
+ParkSwitch#show interfaces vlan XX    !--Verify the configured IP address
+ParkSwitch#show ip redirects          !--Verify the configured default gateway
 
 ~~~~~~~~~~~~~~~~~~~~
 | Setting up VLANs |
 ~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1111866
-ParkRouter>enable
+Description:
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1111866
+ParkSwitch>enable
 Password:
-ParkRouter#configure terminal
-ParkRouter(config)#vlan XX
-ParkRouter(config-vlan)#name Marketing
-ParkRouter(config-vlan)#end
+ParkSwitch#configure terminal
+ParkSwitch(config)#vlan XX
+ParkSwitch(config-vlan)#name Marketing
+ParkSwitch(config-vlan)#end
 
 ----Assigning a VLAN to a port----
-ParkRouter(config)#interface fa0/XX
-ParkRouter(config-if)#switchport mode access
-ParkRouter(config-if)#switchport access vlan XX
+ParkSwitch(config)#interface fa0/XX
+ParkSwitch(config-if)#switchport mode access
+ParkSwitch(config-if)#switchport access vlan XX
 
 ----Display all VLANs----
-ParkRouter#show vlan
+ParkSwitchr#show vlan
+
+~~~~~~~~~~~~~~~~~~~~~
+| InterVLAN Routing |
+~~~~~~~~~~~~~~~~~~~~~
+Description: InterVLAN routing is how computers on different VLANs can communicate with each other.
+Source: https://www.cisco.com/c/en/us/support/docs/lan-switching/inter-vlan-routing/41860-howto-L3-intervlanrouting.html
+Source: (VTP) https://www.cisco.com/c/en/us/support/docs/lan-switching/vtp/10558-21.html
+Source: (VTP) https://www.cisco.com/c/en/us/support/docs/lan-switching/vtp/98154-conf-vlan.html
+ParkSwitch>enable
+Password:
+ParkSwitch#configure terminal
+ParkSwtich(config)#ip routing
+ParkSwitch(config)#vlan database
+ParkSwitch(vlan)#vlan XX
+ParkSwitch(vlan)#vlan XY
+ParkSwitch(vlan)#vlan XZ
+ParkSwitch(vlan)#exit
+ParkSwitch(config)#interface vlan XX
+ParkSwitch(config-if)#ip address 10.0.XX.1 255.255.255.0
+ParkSwitch(config-if)#no shutdown
+ParkSwitch(config-if)#exit
+ParkSwitch(config)#interface vlan XY
+ParkSwitch(config-if)#ip address 10.0.XY.1 255.255.255.0
+ParkSwitch(config-if)#no shutdown
+ParkSwitch(config-if)#exit
+ParkSwitch(config)#interface vlan XZ
+ParkSwitch(config-if)#ip address 10.0.XZ.1 255.255.255.0
+ParkSwitch(config-if)#no shutdown
+ParkSwitch(config-if)#exit
+ParkSwitch(config)#interface FastEthernet 0/1
+ParkSwitch(config-if)#no switchport
+ParkSwitch(config-if)#ip address <default gateway> 255.255.255.0
+ParkSwitch(config-if)#no shutdown
+ParkSwitch(config-if)#exit
+ParkSwitch(config)#ip route 0.0.0.0 0.0.0.0 <default gateway>
+ParkSwitch(config)#exit
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Trunking/Encapsulation |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/10599-88.html
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1200245
-https://www.youtube.com/watch?v=Wi48h6UFhlo
-Trunking is a way for 2 or more switches to pass long data on different vlans without having seperate dedicated lines(interfaces) for each vlan. The data on each vlan still stays inside its assigned vlan. 
-ParkRouter>enable
+Description: Trunking is a way for 2 or more switches to pass long data on different vlans without having seperate dedicated lines(interfaces) for each vlan. The data on each vlan still stays inside its assigned vlan. 
+Description: https://www.youtube.com/watch?v=Wi48h6UFhlo
+Source: https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6000-series-switches/10599-88.html
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swvlan.html#wp1200245
+ParkSwitch>enable
 Password:
-ParkRouter#configure terminal
-ParkRouter(config)#interface fa0/XX
-ParkRouter(config-if)#switchport trunk encapsulation dot1q
-ParkRouter(config-if)#switchport mode trunk
-ParkRouter(config-if)#end
+ParkSwitch#configure terminal
+ParkSwitch(config)#interface fa0/XX
+ParkSwitch(config-if)#switchport trunk encapsulation dot1q
+ParkSwitch(config-if)#switchport mode trunk
+ParkSwitch(config-if)#end
 
 ----Defining the Allowed VLANs on a Trunk----
-ParkRouter(config-if)#switchport trunk allowed vlan add 10
+ParkSwitch(config-if)#switchport trunk allowed vlan add 10
 OR
-ParkRouter(config-if)#switchport trunk allowed vlan remove 20
+ParkSwitch(config-if)#switchport trunk allowed vlan remove 20
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting up Telnet with a password |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1020691
-Telnet is an UNSECURE way to access a Router/Switch
-ParkRouter>enable
-ParkRouter#configure terminal
-ParkRouter(config)#line vty 0 4
-ParkRouter(config-line)# transport input telnet
-ParkRouter(config)#password Cisco123
+Description: Telnet is an UNSECURE way to access a Router/Switch
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1020691
+ParkSwitch>enable
+ParkSwitch#configure terminal
+ParkSwitch(config)#line vty 0 4
+ParkSwitch(config-line)# transport input telnet
+ParkSwitch(config)#password Cisco123
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Configuring Username and Password Pairs |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1046352
-ParkRouter#configure terminal
-ParkRouter(config)#username JohnJay privilege 15 password 7 Cisco123
-ParkRouter(config)#line vty 0 4
-ParkRouter(config)#login local
-ParkRouter(config)#end
+Description:
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1046352
+ParkSwitch#configure terminal
+ParkSwitch(config)#username JohnJay privilege 15 password 7 Cisco123
+ParkSwitch(config)#line vty 0 4
+ParkSwitch(config)#login local
+ParkSwitch(config)#end
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting up Secure Shell |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1227177
-ParkRouter#configure terminal
-ParkRouter(config)#line vty 0 4
-ParkRouter(config-line)# transport input ssh
+Description:
+Source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3560/software/release/12-2_25_sea/configuration/guide/3560scg/swauthen.html#wp1227177
+ParkSwitch#configure terminal
+ParkSwitch(config)#line vty 0 4
+ParkSwitch(config-line)# transport input ssh
 
 ----To disable all forms of remote access (Telnet and SSH)----
-ParkRouter(config)# line vty 0 4
-ParkRouter(config-line)# transport input none
+ParkSwitch(config)# line vty 0 4
+ParkSwitch(config-line)# transport input none
 
 
 
