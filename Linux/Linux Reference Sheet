@@ -96,6 +96,12 @@ sudo nano /etc/ssh/sshd_config
 #Restart SSH
 sudo sytemctl restart ssh
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~
+#| Disable Guest Account |
+#~~~~~~~~~~~~~~~~~~~~~~~~~
+#https://askubuntu.com/questions/451526/removing-guest-session-at-login-in-ubuntu-14-04
+sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" > /etc/lightdm/lightdm.conf
+
 #~~~~~~~~~~~~
 #| Packages |
 #~~~~~~~~~~~~
