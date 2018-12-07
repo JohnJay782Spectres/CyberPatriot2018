@@ -13,6 +13,7 @@ Remove media file
 ->Video
 -->*.mkv *.webm *.flv *.vob *.ogv *.drc *.gifv *.mng *.avi$ *.mov *.qt *.wmv *.yuv *.rm *.rmvb *.asf *.amv *.mp4$ *.m4v *.mp *.m?v *.svi *.3gp *.flv *.f4v
 Remove games
+
 Update all programs
 Turn on Firewall
 Update Firewall
