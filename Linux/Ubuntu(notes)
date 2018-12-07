@@ -1,0 +1,46 @@
+Find file with name using "sudo find . -name searchterm\*"
+Get the hash by opening te file in Geany, copying the text, and paste it into a hash converter for SHA256
+Used "sudo netstat -tulpn" to look at ports and stats
+Use to find installed package "apt list --installed | grep searchterm"
+Remove packages "sudo apt-get remove packagename"
+Delete files:
+sudo find / -name '*.mp3' -type f -delete
+sudo find / -name '*.mov' -type f -delete
+sudo find / -name '*.mp4' -type f -delete
+sudo find / -name '*.avi' -type f -delete
+sudo find / -name '*.mpg' -type f -delete
+sudo find / -name '*.mpeg' -type f -delete
+sudo find / -name '*.flac' -type f -delete
+sudo find / -name '*.m4a' -type f -delete
+sudo find / -name '*.flv' -type f -delete
+sudo find / -name '*.ogg' -type f -delete
+sudo find /home -name '*.gif' -type f -delete
+sudo find /home -name '*.png' -type f -delete
+sudo find /home -name '*.jpg' -type f -delete
+sudo find /home -name '*.jpeg' -type f -delete
+Open config file for disabling guest account:
+"sudo gksu gedit /etc/lightdm/lightdm.conf"
+Add this line:"allow-guest=false"
+Go to \etc\ssh
+Change port value:
+Original:"22"
+Edit:"22222"
+Make sure the next lines are at the end:
+UsePAM yes
+PermitRootLogin no
+Go to \etc\pam.d
+sudo gedit common-password(look for lines similar to this and update to this)
+password	requisite			pam_cracklib.so retry=3 minlen=8 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1
+password	[success=1 default=ignore]	pam_unix.so obscure use_authtok try_first_pass sha512 remember=5 minlen=8
+Password history
+sudo gedit /etc/login.defs
+Moddify values to this:
+PASS_MAX_DAYS	90
+PASS_MIN_DAYS	10
+PASS_WARN_AGE	7
+Install this:
+sudo apt-get install auditd
+Run command:
+sudo auditctl –e 1
+Run command:
+sudo gedit /etc/audit/auditd.conf
