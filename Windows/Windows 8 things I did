@@ -1,1 +1,27 @@
+ The Mayor of Bigby wants to continue to improve the city's efficiency by using Supervisory Control and Data Acquisition/Industrial Control Systems (SCADA/ICS) technology. For the next phase of the project, the City of Bigby has secured access to the fiber and copper infrastructure that will be used to interconnect the buildings that have SCADA/ICS installed.
 
+Your company, Advanced Field Applications (AFA) Consulting LLC, is the lead on the project. Your team has acquired additional computers for the project and must have them configured by the end of the weekend. Your team leader has provided additional information and instructions below.
+
+This company's security policies require that all user accounts be password protected. Employees are required to choose secure passwords, however this policy may not be currently enforced on this computer. The presence of any non-work related media files and "hacking tools" on any computers is strictly prohibited. This company currently does not use any centralized maintenance or polling tools to manage their IT equipment. This computer is for official business use only by authorized users.
+
+Company policy states that Windows Action Center should be enabled and monitoring the security status of desktop Windows operating systems at all times. 
+
+It is company policy to use only Windows 8.1 on this computer. Management has decided that the default web browser for all users on this computer should be the latest stable version of Firefox. However, Internet Explorer must be made available to all employees as an alternative to Firefox. Employees should also have access to the latest stable version of Adobe Reader DC. Management wants you to create a group called tomb for a special project. The only authorized users in the tomb group should be samantha and nadia. 
+
+Answered forensic question 1: find absolute path for MP3 files
+used command C:\>dir /a/b/s *.mp3
+
+Answered forensic question 2
+translated hex message to text
+
+Deleted unauthorized user:ana
+
+changed abby to standard user
+
+gave etzli password: Lm@0sucC
+
+changed ivan to standard user
+
+changed jacob to standard user
+
+changed samantha to standard user
