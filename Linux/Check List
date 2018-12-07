@@ -7,7 +7,7 @@ Turn off FTP
 Remove hacking tools
 ->Common "hacking" tools
 ->If you see a suspicious program look it up on https://www.shouldiremoveit.com/ to see if you should remove it
-->Wireshark, nmap, zenmap, oshcrack, jack the ripper,
+->Wireshark, nmap, zenmap, oshcrack, john the ripper,
 Remove media file
 ->Look for these types of files
 ->Audio
