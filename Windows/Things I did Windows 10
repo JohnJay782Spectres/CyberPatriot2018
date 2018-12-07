@@ -1,1 +1,49 @@
+READ ME
+ The company security policies require all user accounts be password protected. Employees are required to choose secure passwords, however 
+ this policy may not be currently enforced on this computer. It is very important to write down all passwords you change. 
+ The presence of any non-work related media files and "hacking tools" on any computers is strictly prohibited. 
+ This company currently does not use any centralized maintenance or polling tools to manage their IT equipment. This computer is for 
+ official business use only by authorized users.
+Company policy states that Windows Action Center should be enabled and monitoring the security status of desktop Windows operating systems
+at all times.
+This is a critical computer in a production environment. Please do NOT attempt to install Windows "Feature Updates" or
+"Insider Preview Builds." Please do NOT attempt to use the Windows recovery options "Reset this PC" or "Go back to an earlier build". 
+ It is company policy to use only Windows 10 on this computer. Management has decided that the default web browser for all users on this 
+ computer should be the latest stable version of Firefox. However, Internet Explorer must be made available to all employees as an 
+ alternative to Firefox. Employees should also have access to the latest stable version of Notepad++ for official company use.
+Congratulations! You just recruited a promising new team member. Create a new Standard user account named "zachary" with a temporary
+password of your choosing. Be sure to configure this account so that the password for zachary must be changed on next logon.
+Critical Services:
+    Remote Desktop Service
+    Authorized Administrators:
+lara (you)
+	password: (blank/none)
+jonah
+	password: Littl3@birD
+joslin
+	password: 3ndur4N(e&home
+conrad
+	password: captain
 
+Authorized Users:
+samantha
+angus
+alex
+jacob
+sofia
+nadia
+ivan
+abby
+unuratu
+etzli
+zachary
+
+conrad password change to CapT4lN
+etzli changed to standard user
+alex changed to standard user
+Deleted konstantian and mathais
+gave unuratu a password
+added zachary
+updated password policies
+disabled ctrl-alt-del
+disabled FTP
