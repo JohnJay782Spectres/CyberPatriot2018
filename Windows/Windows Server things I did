@@ -1,0 +1,62 @@
+ The Mayor of Bigby wants to continue to improve the city's efficiency by using SCADA/ICS technology. The city will continue to use your
+ consulting company, Advanced Field Applications Consulting LLC, to build a new SCADA/ICS (Supervisory Control and Data 
+ quisition/Industrial Control Systems) system.
+
+AFA will continue with phase 2 by installing routers and switches that will facilitate basic connectivity between street lights and 
+cameras to the management servers located at the Public Works Office.
+
+Your team is responsible for configuring new equipment that was recently installed in the Public Works Office. Your team must complete
+its work today. Your team leader has provided information and instructions below.
+
+The company security policies require all user accounts be password protected. Employees are required to choose secure passwords, however
+this policy may not be currently enforced on this computer. It is very important to write down all passwords you change. The presence of
+any non-work related media files and "hacking tools" on any computers is strictly prohibited. This company currently does not use any 
+centralized maintenance or polling tools to manage their IT equipment. This computer is for official business use only by authorized
+users.
+
+This is a critical computer in a production environment. Please do NOT attempt to install Windows "Feature Updates" or 
+"Insider Preview Builds." Please do NOT attempt to use the Windows recovery options "Reset this PC" or "Go back to an earlier build".
+Windows Server 2016
+
+It is company policy to use only Windows Server 2016 on this computer. Management has decided that the default web browser for all users
+on this computer should be the latest stable version of Firefox. However, Internet Explorer must be made available to all employees as 
+an alternative to Firefox. Employees should also have access to the latest stable version of Geany, 7-Zip, and PuTTY for official 
+company use.
+
+Your webmaster is going to install a company web site on this server that depends on IIS Word Wide Web Publishing Service (W3SVC) 
+and PHP 5.6. Your webmaster will install the company web site as the default web site for this computer. You notified your web
+developers that PHP 5.6 is no longer receiving security updates. Your web developers are hard at work adding support for PHP 7,
+but for now PHP 5.6 is required for this web server.
+
+Do not change the currently configured default website directory, or the PHP installation directory. Your webmaster needs these 
+components to be in their current location so that it matches your testing environment.
+
+Critical Services:
+
+    IIS Web Server (W3SVC)
+
+Authorized Administrators and Users
+
+Authorized Administrators:
+wukong (you)
+	password: (Blank/None)
+penny
+	password: F!r3Wa11
+jonesy
+	password: $3rg3nt#
+jess
+	password: ^$c0ut_F1nD
+
+Authorized Users:
+izza
+luna
+rio
+ken
+calamity
+kyle
+banshee
+wildcat
+specter
+raptor
+
+deleted users and changed password policies 9 points
