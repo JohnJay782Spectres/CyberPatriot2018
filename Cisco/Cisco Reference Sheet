@@ -178,7 +178,13 @@ ParkSwitch(config-line)# transport input none
 ~~~~~~~~
 Description:
 Source: https://www.cisco.com/c/en/us/td/docs/security/asa/asa82/configuration/guide/config/route_ospf.html
-
+~~~~~~~~~
+| Extra | 
+~~~~~~~~
+ParkSwitch# show interfaces status #shows the status of all interfaces
+ParkSwitch# show module all # shows the status of loaded modules
+source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/12-2/31sg/configuration/guide/conf/connect.pdf
+( also has how to telnet and MAC addresing on it)
 
 
 
