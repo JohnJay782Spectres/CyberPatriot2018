@@ -186,6 +186,31 @@ ParkSwitch# show module all # shows the status of loaded modules
 source: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/12-2/31sg/configuration/guide/conf/connect.pdf
 ( also has how to telnet and MAC addresing on it)
 
+~~~~~~~~~~~~~~~~~
+| Default Gateway|
+~~~~~~~~~~~~~~~~~
+ParkSwitch(config) ip default-gateway 192.168.1.0
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|assinging ports and ranges to vlans|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ParkSwitch(config-if) switchport access vlan [vlan-id| none]
+ source: https://www.cisco.com/c/en/us/support/docs/smb/switches/cisco-small-business-300-series-managed-switches/smb5653-configure-port-to-vlan-interface-settings-on-a-switch-throug.html
+ 
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ | assigning encapsulation to a sub-if menu|
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ParkSwith(config-subif) encapsulation dot1Q 1 native (sets it to encapsulation dot1q and VLANID1:Native)
+ ParkSwith(config-subif) encapsulation dot1Q 2 (sets it to encapsulation dot1q and VLANID: 2)
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ |Configurating multiple ports at once|
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ParkSwitch(config) interface range Fa1/5-8
+ ~~~~~~~~~~~~~~~~~~~~~~~
+ |Acess Group command|
+ ~~~~~~~~~~~~~~~~~~~~~~
+ParkSwitch(config-if) ip access-group 101 in
+
 
 
 
