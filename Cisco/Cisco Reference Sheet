@@ -202,6 +202,7 @@ ParkSwitch(config-if) switchport access vlan [vlan-id| none]
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  ParkSwith(config-subif) encapsulation dot1Q 1 native (sets it to encapsulation dot1q and VLANID1:Native)
  ParkSwith(config-subif) encapsulation dot1Q 2 (sets it to encapsulation dot1q and VLANID: 2)
+ Resource: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9500/software/release/16-10/configuration_guide/vlan/b_1610_vlan_9500_cg/configuring_layer_3_subinterfaces.pdf
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  |Configurating multiple ports at once|
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
