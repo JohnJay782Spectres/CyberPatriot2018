@@ -214,11 +214,14 @@ ParkSwitch(config-if) ip access-group 101 in
 ~~~~~~~~~~~~~~~~~~~~~~
 | Configuring RIP |
 ~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config) ip route 0.0.0.0 0.0.0.0 192.168.14.4 # adds a route to be broadcasted using RIP
+        # ip router 0.0.0.0 0.0.0.0 <ip to be forwarded to, usually ISP or server>
 ParkRouter(config)router rip  # enables the RIP protocol and interfaces to it
 ParkRouter(config-router ) no auto-summary # may or may not be needed
 ParkRouter(config-router) version 2 # uses the version 2 of RIP 
 ParkRouter(config-router) network 10.1.1.0
 https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_rip/configuration/15-mt/irr-15-mt-book/irr-cfg-info-prot.html#GUID-E2AED23B-0B10-4049-9D23-CD29900173D2
+https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/rip-default-route
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting Default route for RIP|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -227,6 +230,10 @@ ParkRouter(config-router)default-information originate
 | Pinging Server|
 ~~~~~~~~~~~~~~~~~
 ParkRouter# pin 8.8.8.8 # shows wether the packets get there
+~~~~~~~~~~~~~~~~~~~~~~
+| restricting vlans on a trunked port|
+~~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config-if)#switchport trunk allowed vlan 1,10,20
 
 
 
