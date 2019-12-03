@@ -6,6 +6,9 @@ Set Password Policies
 Turn off FTP
 Remove hacking tools
 ->If you see a suspicious program look it up on https://www.shouldiremoveit.com/ to see if you should remove it
+->Check virustotal.com
+-> Run this command in Powershell to see all of the processes that are running on the computer
+-> $X=@{};PS|%{$X[$_.Id]=$_.Name};Netstat -ano|Select -Skip 4|%{"$_ "+$X.[Int]$_.Substring(71)}
 Remove media file
 ->Look for these types of files
 ->Audio
