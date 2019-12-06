@@ -255,6 +255,24 @@ Note about always keyword: The always keyword includes the following exception:
 when a route map is used. When a route map is used, the origination 
 of the default route by OSPF is not bound to the existence of a default route in the 
 routing table.
+~~~~~~~~~~~~~~~~~~~~~~~~
+| Define Range for OSPF route summarization
+~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config-router)area area-id range ip-address mask
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+ | OSPF preference of route |
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Increase cost of one interface in ospf compaered to one another in
+ order for OSPF to prefer that route
+ ~~~~~~~~~~~~~~~~~~~~~~~~~
+ | setting static routes |
+ ~~~~~~~~~~~~~~~~~~~~~~
+ ParkRouter(config)ip routing  // enables ip routing
+ ParkRouter(config) ip route prefix mask ip-address
+ 
+
+
+
 ~~~~~~~~~~~~~~~~~
 | Clearing OSPF |
 ~~~~~~~~~~~~~~~~~
