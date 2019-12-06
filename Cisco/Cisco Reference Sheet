@@ -234,6 +234,22 @@ ParkRouter# pin 8.8.8.8 # shows wether the packets get there
 | restricting vlans on a trunked port|
 ~~~~~~~~~~~~~~~~~~~~~~~~
 ParkRouter(config-if)#switchport trunk allowed vlan 1,10,20
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+|   Enabling OSPF |
+~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config)#router ospf process_id 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|  Defining an interface for OSPF  |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config-router)network ip-address wildcard-mask area area-id
+~~~~~~~~~~~~~~~~~
+| Clearing OSPF |
+~~~~~~~~~~~~~~~~~
+ParkRouter(config) clear ospf pid
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Setting an OSPF router ID  |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config-router)router-id routerID
 
 
 
