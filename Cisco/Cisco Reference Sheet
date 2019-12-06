@@ -242,15 +242,23 @@ ParkRouter(config)#router ospf process_id
 |  Defining an interface for OSPF  |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ParkRouter(config-router)network ip-address wildcard-mask area area-id
-~~~~~~~~~~~~~~~~~
-| Clearing OSPF |
-~~~~~~~~~~~~~~~~~
-ParkRouter(config) clear ospf pid
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting an OSPF router ID  |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ParkRouter(config-router)router-id routerID
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Setting OSPF default route |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config-router) default-information originate (always)
+* always keyword sometimes not used
+Note about always keyword: The always keyword includes the following exception:
+when a route map is used. When a route map is used, the origination 
+of the default route by OSPF is not bound to the existence of a default route in the 
+routing table.
+~~~~~~~~~~~~~~~~~
+| Clearing OSPF |
+~~~~~~~~~~~~~~~~~
+ParkRouter(config) clear ospf pid
 
 
 
