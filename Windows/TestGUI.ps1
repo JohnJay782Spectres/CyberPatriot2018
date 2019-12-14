@@ -1,4 +1,15 @@
-﻿Function Test-Window
+﻿<#Author: Brian
+  Date: 14-DEC-2019
+  Version: 2.0
+
+  ~~~~~~~NOTES~~~~~~~
+  
+
+  ~~~~~~~NOTES~~~~~~~
+#>
+
+
+Function Test-Window
 {
     [System.Windows.MessageBox]::Show('Hello','Header')
 }
@@ -7,17 +18,39 @@ Function Test-GUI
     Add-Type -assembly System.Windows.Forms
     Add-Type -assembly System.Drawing
     $main_form = New-Object System.Windows.Forms.Form
-    $main_form.Size = New-Object System.Drawing.Size(1200,800)
+    $main_form.Size = New-Object System.Drawing.Size(1200,1200)
     $main_form.StartPosition = "CenterScreen" 
     $main_form.FormBorderStyle = 'Fixed3D' 
     $main_form.Text = "My Application"
     
+    $ArrayOfButtons = New-Object System.Collections.ArrayList
+    $temp = Create-Button -Name "Add Users" -xCoord 10 -yCood 10
+    $ArrayOfButtons.Add($temp)
+    $temp = Create-Button -Name "Remove Users" -xCoord 10 -yCood 70
+    $ArrayOfButtons.Add($temp)
     
+    
+    $ArrayOfButtons[0].Add_Click(
+    {
+        $new_form = New-Object System.Windows.Forms.Form
+        $new_form.Size = New-Object System.Drawing.Size(800,800)
+        $new_form.StartPosition = "CenterScreen"
+        $new_form.FormBorderStyle = 'Fixed3D' 
+        $new_form.Text = "$Add Users"
+        #insert code here
+        $new_form.ShowDialog()
+    })
+
+    
+
+    $main_form.Controls.Add($ArrayOfButtons[0]) #can do it was $arr[0..1] is the form command in the create-button function is un-commented
+    $main_form.Controls.Add($ArrayOfButtons[1])
+    <#
     #Add new Users button
     $Button1 = New-Object System.Windows.Forms.Button
     $Button1.Location = New-Object System.Drawing.Size(10,10)
-    $Button1.Size = New-Object System.Drawing.Size(210,25)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button1.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button1.Font = $Font
     $Button1.Text = "Click to Add users"
     $Button1.Add_Click(
@@ -104,9 +137,9 @@ Function Test-GUI
 
     #Delete user button
     $Button2 = New-Object System.Windows.Forms.Button
-    $Button2.Location = New-Object System.Drawing.Size(10,40)
-    $Button2.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button2.Location = New-Object System.Drawing.Size(10,70)
+    $Button2.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button2.Font = $Font
     $Button2.Text = "Click to Delete users"
     $Button2.Add_Click(
@@ -124,9 +157,9 @@ Function Test-GUI
     #Switch users from Admins to Standard Users
     #I want this to be a check box type of thing. Where all the users will be listed
     $Button3 = New-Object System.Windows.Forms.Button
-    $Button3.Location = New-Object System.Drawing.Size(10,70)
-    $Button3.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button3.Location = New-Object System.Drawing.Size(10,130)
+    $Button3.Size = New-Object System.Drawing.Size(330, 50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button3.Font = $Font
     $Button3.Text = "Remove Admins"
     $Button3.Add_Click(
@@ -143,9 +176,9 @@ Function Test-GUI
     
     #Remove audio and video button
     $Button4 = New-Object System.Windows.Forms.Button
-    $Button4.Location = New-Object System.Drawing.Size(10,100)
-    $Button4.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button4.Location = New-Object System.Drawing.Size(10,190)
+    $Button4.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button4.Font = $Font
     $Button4.Text = "Remove audio and video"
     $Button4.Add_Click(
@@ -162,9 +195,9 @@ Function Test-GUI
 
     #Remove games and hacking tools
     $Button5 = New-Object System.Windows.Forms.Button
-    $Button5.Location = New-Object System.Drawing.Size(10,130)
-    $Button5.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button5.Location = New-Object System.Drawing.Size(10,250)
+    $Button5.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button5.Font = $Font
     $Button5.Text = "Remove games"
     $Button5.Add_Click(
@@ -181,9 +214,9 @@ Function Test-GUI
     
     #Set Password policies
     $Button6 = New-Object System.Windows.Forms.Button
-    $Button6.Location = New-Object System.Drawing.Size(10,160)
-    $Button6.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button6.Location = New-Object System.Drawing.Size(10,310)
+    $Button6.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button6.Font = $Font
     $Button6.Text = "Set Password Policies"
     $Button6.Add_Click(
@@ -200,9 +233,9 @@ Function Test-GUI
     
     #Set Lockout policies
     $Button7 = New-Object System.Windows.Forms.Button
-    $Button7.Location = New-Object System.Drawing.Size(10,190)
-    $Button7.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button7.Location = New-Object System.Drawing.Size(10,370)
+    $Button7.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button7.Font = $Font
     $Button7.Text = "Set Lockout Policies"
     $Button7.Add_Click(
@@ -219,9 +252,9 @@ Function Test-GUI
 
     #Turn off FTP and IIS
     $Button8 = New-Object System.Windows.Forms.Button
-    $Button8.Location = New-Object System.Drawing.Size(10,220)
-    $Button8.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button8.Location = New-Object System.Drawing.Size(10,430)
+    $Button8.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button8.Font = $Font
     $Button8.Text = "Turn off FTP and IIS"
     $Button8.Add_Click(
@@ -238,9 +271,9 @@ Function Test-GUI
     
     #Disable Remote Desktop
     $Button9 = New-Object System.Windows.Forms.Button
-    $Button9.Location = New-Object System.Drawing.Size(10,250)
-    $Button9.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button9.Location = New-Object System.Drawing.Size(10,490)
+    $Button9.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button9.Font = $Font
     $Button9.Text = "Disable Remote Desktop"
     $Button9.Add_Click(
@@ -257,9 +290,9 @@ Function Test-GUI
     
     #Turn on firewall
     $Button10 = New-Object System.Windows.Forms.Button
-    $Button10.Location = New-Object System.Drawing.Size(10,280)
-    $Button10.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Button10.Location = New-Object System.Drawing.Size(10,550)
+    $Button10.Size = New-Object System.Drawing.Size(330,50)
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button10.Font = $Font
     $Button10.Text = "Enable Firewall"
     $Button10.Add_Click(
@@ -273,7 +306,7 @@ Function Test-GUI
         $new_form.ShowDialog()
     })
     $main_form.Controls.Add($Button10)
-    
+    #>
     <#
     $OKButton = New-Object System.Windows.Forms.Button
     $OKButton.Location = New-Object System.Drawing.Point(75,120)
@@ -328,7 +361,7 @@ Function Test-GUI
     $Font = New-Object System.Drawing.Font("Arial",20,[System.Drawing.FontStyle]::Bold) 
     $Label.Font = $Font 
     $main_form.Controls.Add($Label)
-
+    
     
     $ComboBox = New-Object System.Windows.Forms.ComboBox
     $ComboBox.Width = 300
@@ -372,7 +405,7 @@ Function Test-GUI
     $Button69 = New-Object System.Windows.Forms.Button
     $Button69.Location = New-Object System.Drawing.Size(970,740)
     $Button69.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",12,[System.Drawing.FontStyle]::Bold) 
+    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
     $Button69.Font = $Font
     $Button69.Text = "Just do it all for me"
     $Button69.Add_Click(
@@ -390,6 +423,29 @@ Function Test-GUI
 
     $main_form.ShowDialog()
 } 
+
+Function Create-Button{
+    param($Name, $xCoord, $yCood)
+    $New_Button = New-Object System.Windows.Forms.Button
+    $New_Button.Location = New-Object System.Drawing.Size($xCoord,$yCood)
+    $New_Button.Size = New-Object System.Drawing.Size(330,50)
+    $New_Button.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
+    $New_Button.Text = "$Name"
+    $New_Button
+    #$main_form.Controls.Add($New_Button)
+}
+
+Function Create-Label{
+    param($Text,$xCoord, $yCoord, $xSize, $ySize)
+    $Label = New-Object System.Windows.Forms.Label
+    $Label.Text = "$Text"
+    $Label.AutoSize = $true
+    $Label.Location  = New-Object System.Drawing.Point($xCoord,$yCoord)
+    $Label.Size = New-Object System.Drawing.Size($xSize,$ySize)
+    $Label
+    #$new_form.Controls.Add($Label)
+}
+
 Test-GUI
 
 #https://gallery.technet.microsoft.com/scriptcenter/How-to-build-a-form-in-7e343ba3
