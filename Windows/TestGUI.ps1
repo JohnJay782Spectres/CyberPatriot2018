@@ -3,7 +3,10 @@
   Version: 2.0
 
   ~~~~~~~NOTES~~~~~~~
-  
+  //TODO
+  1) Checklist
+     -List everything and have the ability to check off items
+  2) Create the buttons for each checklist item
 
   ~~~~~~~NOTES~~~~~~~
 #>
@@ -33,11 +36,42 @@ Function Test-GUI
     $ArrayOfButtons[0].Add_Click(
     {
         $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(800,800)
+        $new_form.Size = New-Object System.Drawing.Size(575,575)
         $new_form.StartPosition = "CenterScreen"
+        $new_form.MaximizeBox = $false
+        $new_form.MinimizeBox = $false
+        $new_form.HelpButton = $true
         $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "$Add Users"
-        #insert code here
+        $new_form.Text = "New User"
+
+        
+        #Creates an array of labels
+        $Labels = New-Object System.Collections.ArrayList
+        $Labels.Add((Create-Label -Text "User name:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
+        $Labels.Add((Create-Label -Text "Full name:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
+        $Labels.Add((Create-Label -Text "Description:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
+        #The follow label is used to create a thin grey line
+        $Labels.Add((Create-Label -Text "" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 535 -ySize 2))
+        $Labels[3].BorderStyle = 'Fixed3D'
+        $Labels[3].AutoSize = $false
+        $Labels.Add((Create-Label -Text "Password:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
+        $Labels.Add((Create-Label -Text "Confirm Password:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
+
+        #Creates an array of textboxes
+        $Textboxes = New-Object System.Collections.ArrayList
+        for($i=0;$i -lt 3;$i++){$Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))}
+        for($i=0;$i -lt 2;$i++){$Textboxes.Add((Create-Textbox -xCoord 175 -yCoord (60+($Textboxes.Count * 40)) -xSize 375 -ySize 20))}
+        <# Saving these just in case 14DEC2019
+        $Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))
+        $Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))
+        $Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))
+        $Textboxes.Add((Create-Textbox -xCoord 175 -yCoord (60+($Textboxes.Count * 40)) -xSize 375 -ySize 20))
+        $Textboxes.Add((Create-Textbox -xCoord 175 -yCoord (60+($Textboxes.Count * 40)) -xSize 375 -ySize 20))#>
+
+        
+        #Add the Labels and Textboxes to the add user form
+        for($i=0;$i -lt $Labels.Count;$i++){$new_form.Controls.Add(($Labels[$i]))}
+        for($i=0;$i -lt $Textboxes.Count;$i++){$new_form.Controls.Add(($Textboxes[$i]))}
         $new_form.ShowDialog()
     })
 
@@ -45,7 +79,7 @@ Function Test-GUI
 
     $main_form.Controls.Add($ArrayOfButtons[0]) #can do it was $arr[0..1] is the form command in the create-button function is un-commented
     $main_form.Controls.Add($ArrayOfButtons[1])
-    <#
+    
     #Add new Users button
     $Button1 = New-Object System.Windows.Forms.Button
     $Button1.Location = New-Object System.Drawing.Size(10,10)
@@ -56,7 +90,7 @@ Function Test-GUI
     $Button1.Add_Click(
     {
         $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
+        $new_form.Size = New-Object System.Drawing.Size(500,500)
         $new_form.StartPosition = "CenterScreen"
         $new_form.FormBorderStyle = 'Fixed3D' 
         $new_form.Text = "New user"
@@ -71,6 +105,8 @@ Function Test-GUI
         $textBox1 = New-Object System.Windows.Forms.TextBox
         $textBox1.Location = New-Object System.Drawing.Point(120,20)
         $textBox1.Size = New-Object System.Drawing.Size(260,20)
+        $textBox1.font = New-Object System.Drawing.Font("Arial",14,[System.Drawing.FontStyle]::Bold)
+        $textBox1.Width = 300
         $new_form.Controls.Add($textBox1)
 
         $Label2 = New-Object System.Windows.Forms.Label
@@ -134,7 +170,7 @@ Function Test-GUI
         $new_form.ShowDialog()
     })
     $main_form.Controls.Add($Button1)
-
+    <#
     #Delete user button
     $Button2 = New-Object System.Windows.Forms.Button
     $Button2.Location = New-Object System.Drawing.Size(10,70)
@@ -442,8 +478,20 @@ Function Create-Label{
     $Label.AutoSize = $true
     $Label.Location  = New-Object System.Drawing.Point($xCoord,$yCoord)
     $Label.Size = New-Object System.Drawing.Size($xSize,$ySize)
+    $Label.font = New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontStyle]::Regular)
     $Label
     #$new_form.Controls.Add($Label)
+}
+
+Function Create-Textbox{
+    param($xCoord, $yCoord, $xSize, $ySize)
+    $textBox = New-Object System.Windows.Forms.TextBox
+    $textBox.Location = New-Object System.Drawing.Point($xCoord,$yCoord)
+    $textBox.Size = New-Object System.Drawing.Size($xSize,$ySize)
+    $textBox.AutoSize = $true
+    $textBox.font = New-Object System.Drawing.Font("Arial",14,[System.Drawing.FontStyle]::Regular)
+    $textBox
+    #$new_form.Controls.Add($textBox)
 }
 
 Test-GUI
