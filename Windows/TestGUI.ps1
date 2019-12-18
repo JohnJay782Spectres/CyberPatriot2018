@@ -18,6 +18,7 @@ Function Test-Window
 }
 Function Test-GUI
 {
+    #Creates the main form window
     Add-Type -assembly System.Windows.Forms
     Add-Type -assembly System.Drawing
     $main_form = New-Object System.Windows.Forms.Form
@@ -26,13 +27,12 @@ Function Test-GUI
     $main_form.FormBorderStyle = 'Fixed3D' 
     $main_form.Text = "My Application"
     
+    #Creates an array of buttons
     $ArrayOfButtons = New-Object System.Collections.ArrayList
-    $temp = Create-Button -Name "Add Users" -xCoord 10 -yCood 10
-    $ArrayOfButtons.Add($temp)
-    $temp = Create-Button -Name "Remove Users" -xCoord 10 -yCood 70
-    $ArrayOfButtons.Add($temp)
+    $ArrayOfButtons.Add((Create-Button -Name "Add Users" -xCoord 10 -yCood 10))
+    $ArrayOfButtons.Add((Create-Button -Name "Remove Users" -xCoord 10 -yCood (10+($ArrayOfButtons.Count * 60))))
     
-    
+    #The Functionality behind the "Add Users" button
     $ArrayOfButtons[0].Add_Click(
     {
         $new_form = New-Object System.Windows.Forms.Form
@@ -43,306 +43,66 @@ Function Test-GUI
         $new_form.HelpButton = $true
         $new_form.FormBorderStyle = 'Fixed3D' 
         $new_form.Text = "New User"
-
         
         #Creates an array of labels
         $Labels = New-Object System.Collections.ArrayList
-        $Labels.Add((Create-Label -Text "User name:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
-        $Labels.Add((Create-Label -Text "Full name:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
-        $Labels.Add((Create-Label -Text "Description:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
+        $Labels.Add((Create-Label -Text "User name:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20 -FontSize 8))
+        $Labels.Add((Create-Label -Text "Full name:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20 -FontSize 8))
+        $Labels.Add((Create-Label -Text "Description:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20 -FontSize 8))
         #The follow label is used to create a thin grey line
-        $Labels.Add((Create-Label -Text "" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 535 -ySize 2))
+        $Labels.Add((Create-Label -Text "" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 535 -ySize 2 -FontSize 8))
         $Labels[3].BorderStyle = 'Fixed3D'
         $Labels[3].AutoSize = $false
-        $Labels.Add((Create-Label -Text "Password:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
-        $Labels.Add((Create-Label -Text "Confirm Password:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20))
+        $Labels.Add((Create-Label -Text "Password:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20 -FontSize 8))
+        $Labels.Add((Create-Label -Text "Confirm Password:" -xCoord 15 -yCoord (30+($Labels.Count * 40)) -xSize 100 -ySize 20 -FontSize 8))
 
         #Creates an array of textboxes
         $Textboxes = New-Object System.Collections.ArrayList
-        for($i=0;$i -lt 3;$i++){$Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))}
-        for($i=0;$i -lt 2;$i++){$Textboxes.Add((Create-Textbox -xCoord 175 -yCoord (60+($Textboxes.Count * 40)) -xSize 375 -ySize 20))}
+        for($i=0;$i -lt 3;$i++){$Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20 -FontSize 14))}
+        for($i=0;$i -lt 2;$i++){$Textboxes.Add((Create-Textbox -xCoord 175 -yCoord (60+($Textboxes.Count * 40)) -xSize 375 -ySize 20 -FontSize 14))
+                                $Textboxes[(3+$i)].UseSystemPasswordChar = $true} #Sets it so that password field is covered
         <# Saving these just in case 14DEC2019
         $Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))
         $Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))
         $Textboxes.Add((Create-Textbox -xCoord 150 -yCoord (20+($Textboxes.Count * 40)) -xSize 400 -ySize 20))
         $Textboxes.Add((Create-Textbox -xCoord 175 -yCoord (60+($Textboxes.Count * 40)) -xSize 375 -ySize 20))
         $Textboxes.Add((Create-Textbox -xCoord 175 -yCoord (60+($Textboxes.Count * 40)) -xSize 375 -ySize 20))#>
+        #Creates an array of RadioButtons
+        $Radioes = New-Object System.Collections.ArrayList
+        $Radioes.Add((Create-RadioButton -Text "User Must change password at next logon" -xCoord 15 -yCoord 280))
+        $Radioes.Add((Create-RadioButton -Text "User cannot change password" -xCoord 15 -yCoord 310))
+        $Radioes.Add((Create-RadioButton -Text "Password never expires" -xCoord 15 -yCoord 340))
+        $Radioes.Add((Create-RadioButton -Text "Account is disabled" -xCoord 15 -yCoord 370))
 
+        #Find a way to grey out the button
+        $CreateButton = Create-Button -Name "Create" -xCoord 316 -yCood 480
+        $CreateButton.Size = '112,36'
+        $CreateButton.Font =  New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontStyle]::Regular)
+        $CreateButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+        $new_form.AcceptButton = $CreateButton
+        $new_form.Controls.Add($CreateButton)
         
+        $CancelButton = Create-Button -Name "Close" -xCoord 438 -yCood 480
+        $CancelButton.Size = '112,36'
+        $CancelButton.Font =  New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontStyle]::Regular)
+        $CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+        $new_form.CancelButton = $CancelButton
+        $new_form.Controls.Add($CancelButton)
+
         #Add the Labels and Textboxes to the add user form
         for($i=0;$i -lt $Labels.Count;$i++){$new_form.Controls.Add(($Labels[$i]))}
         for($i=0;$i -lt $Textboxes.Count;$i++){$new_form.Controls.Add(($Textboxes[$i]))}
-        $new_form.ShowDialog()
-    })
-
-    
-
-    $main_form.Controls.Add($ArrayOfButtons[0]) #can do it was $arr[0..1] is the form command in the create-button function is un-commented
-    $main_form.Controls.Add($ArrayOfButtons[1])
-    
-    #Add new Users button
-    $Button1 = New-Object System.Windows.Forms.Button
-    $Button1.Location = New-Object System.Drawing.Size(10,10)
-    $Button1.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button1.Font = $Font
-    $Button1.Text = "Click to Add users"
-    $Button1.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(500,500)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "New user"
+        for($i=0;$i -lt $Textboxes.Count; $i++){Write-Host $Textboxes[$i].Text}
+        for($i=0;$i -lt $Radioes.Count; $i++){$new_form.Controls.Add(($Radioes[$i]))}
         
-        $Label1 = New-Object System.Windows.Forms.Label
-        $Label1.Text = "User name: "
-        $Label1.AutoSize = $true
-        $Label1.Location  = New-Object System.Drawing.Point(10,20)
-        $Label1.Size = New-Object System.Drawing.Size(100,30)
-        $new_form.Controls.Add($Label1)
-
-        $textBox1 = New-Object System.Windows.Forms.TextBox
-        $textBox1.Location = New-Object System.Drawing.Point(120,20)
-        $textBox1.Size = New-Object System.Drawing.Size(260,20)
-        $textBox1.font = New-Object System.Drawing.Font("Arial",14,[System.Drawing.FontStyle]::Bold)
-        $textBox1.Width = 300
-        $new_form.Controls.Add($textBox1)
-
-        $Label2 = New-Object System.Windows.Forms.Label
-        $Label2.Text = "Full name: "
-        $Label2.AutoSize = $true
-        $Label2.Location  = New-Object System.Drawing.Point(10,50)
-        $Label2.Size = New-Object System.Drawing.Size(100,30)
-        $new_form.Controls.Add($Label2)
-
-        $textBox2 = New-Object System.Windows.Forms.TextBox
-        $textBox2.Location = New-Object System.Drawing.Point(120,50)
-        $textBox2.Size = New-Object System.Drawing.Size(260,20)
-        $new_form.Controls.Add($textBox2)
-
-        $Label3 = New-Object System.Windows.Forms.Label
-        $Label3.Text = "Description: "
-        $Label3.AutoSize = $true
-        $Label3.Location  = New-Object System.Drawing.Point(10,80)
-        $Label3.Size = New-Object System.Drawing.Size(100,30)
-        $new_form.Controls.Add($Label3)
-
-        $textBox3 = New-Object System.Windows.Forms.TextBox
-        $textBox3.Location = New-Object System.Drawing.Point(120,80)
-        $textBox3.Size = New-Object System.Drawing.Size(260,20)
-        $new_form.Controls.Add($textBox3)
-
-        #Thin grey line
-        $Label4 = New-Object System.Windows.Forms.Label
-        $Label4.Text = ""
-        #$Label4.AutoSize = $true
-        $Label4.Location  = New-Object System.Drawing.Point(10,115)
-        $Label4.Size = New-Object System.Drawing.Size(370,2)
-        $Label4.BorderStyle = 'Fixed3D'
-        $new_form.Controls.Add($Label4)
-
-        $Label5 = New-Object System.Windows.Forms.Label
-        $Label5.Text = "Password: "
-        $Label5.AutoSize = $true
-        $Label5.Location  = New-Object System.Drawing.Point(10,130)
-        $Label5.Size = New-Object System.Drawing.Size(100,30)
-        $new_form.Controls.Add($Label5)
-
-        $textBox4 = New-Object System.Windows.Forms.TextBox
-        $textBox4.Location = New-Object System.Drawing.Point(140,130)
-        $textBox4.Size = New-Object System.Drawing.Size(240,20)
-        $new_form.Controls.Add($textBox4)
-
-        $Label6 = New-Object System.Windows.Forms.Label
-        $Label6.Text = "Confirm Password: "
-        $Label6.AutoSize = $true
-        $Label6.Location  = New-Object System.Drawing.Point(10,160)
-        $Label6.Size = New-Object System.Drawing.Size(100,30)
-        $new_form.Controls.Add($Label6)
-
-        $textBox5 = New-Object System.Windows.Forms.TextBox
-        $textBox5.Location = New-Object System.Drawing.Point(140,160)
-        $textBox5.Size = New-Object System.Drawing.Size(240,20)
-        $new_form.Controls.Add($textBox5)
-
-
+        
         $new_form.ShowDialog()
     })
-    $main_form.Controls.Add($Button1)
-    <#
-    #Delete user button
-    $Button2 = New-Object System.Windows.Forms.Button
-    $Button2.Location = New-Object System.Drawing.Size(10,70)
-    $Button2.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button2.Font = $Font
-    $Button2.Text = "Click to Delete users"
-    $Button2.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Delete user"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button2)
+
+    #Adds the Buttons to the form to be displayed
+    for($i=0;$i -lt $ArrayOfButtons.Count;$i++){$main_form.Controls.Add(($ArrayOfButtons[$i]))}
     
-    #Switch users from Admins to Standard Users
-    #I want this to be a check box type of thing. Where all the users will be listed
-    $Button3 = New-Object System.Windows.Forms.Button
-    $Button3.Location = New-Object System.Drawing.Size(10,130)
-    $Button3.Size = New-Object System.Drawing.Size(330, 50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button3.Font = $Font
-    $Button3.Text = "Remove Admins"
-    $Button3.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Switch an Admin user to a standard user"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button3)
     
-    #Remove audio and video button
-    $Button4 = New-Object System.Windows.Forms.Button
-    $Button4.Location = New-Object System.Drawing.Size(10,190)
-    $Button4.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button4.Font = $Font
-    $Button4.Text = "Remove audio and video"
-    $Button4.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Removes all audio and video media files"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button4)
-
-    #Remove games and hacking tools
-    $Button5 = New-Object System.Windows.Forms.Button
-    $Button5.Location = New-Object System.Drawing.Size(10,250)
-    $Button5.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button5.Font = $Font
-    $Button5.Text = "Remove games"
-    $Button5.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Removes all games and hacking tools"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button5)
-    
-    #Set Password policies
-    $Button6 = New-Object System.Windows.Forms.Button
-    $Button6.Location = New-Object System.Drawing.Size(10,310)
-    $Button6.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button6.Font = $Font
-    $Button6.Text = "Set Password Policies"
-    $Button6.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Sets Password policies"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button6)
-    
-    #Set Lockout policies
-    $Button7 = New-Object System.Windows.Forms.Button
-    $Button7.Location = New-Object System.Drawing.Size(10,370)
-    $Button7.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button7.Font = $Font
-    $Button7.Text = "Set Lockout Policies"
-    $Button7.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Sets Lockout policies"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button7)
-
-    #Turn off FTP and IIS
-    $Button8 = New-Object System.Windows.Forms.Button
-    $Button8.Location = New-Object System.Drawing.Size(10,430)
-    $Button8.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button8.Font = $Font
-    $Button8.Text = "Turn off FTP and IIS"
-    $Button8.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Turns off FTP and IIS"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button8)
-    
-    #Disable Remote Desktop
-    $Button9 = New-Object System.Windows.Forms.Button
-    $Button9.Location = New-Object System.Drawing.Size(10,490)
-    $Button9.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button9.Font = $Font
-    $Button9.Text = "Disable Remote Desktop"
-    $Button9.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Disables Remote Desktop"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button9)
-    
-    #Turn on firewall
-    $Button10 = New-Object System.Windows.Forms.Button
-    $Button10.Location = New-Object System.Drawing.Size(10,550)
-    $Button10.Size = New-Object System.Drawing.Size(330,50)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button10.Font = $Font
-    $Button10.Text = "Enable Firewall"
-    $Button10.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Enables the Firewall"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button10)
-    #>
     <#
     $OKButton = New-Object System.Windows.Forms.Button
     $OKButton.Location = New-Object System.Drawing.Point(75,120)
@@ -437,24 +197,17 @@ Function Test-GUI
     )
     
 
-    #Does it all
-    $Button69 = New-Object System.Windows.Forms.Button
-    $Button69.Location = New-Object System.Drawing.Size(970,740)
-    $Button69.Size = New-Object System.Drawing.Size(210,23)
-    $Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold) 
-    $Button69.Font = $Font
-    $Button69.Text = "Just do it all for me"
-    $Button69.Add_Click(
-    {
-        $new_form = New-Object System.Windows.Forms.Form
-        $new_form.Size = New-Object System.Drawing.Size(400,400)
-        $new_form.StartPosition = "CenterScreen"
-        $new_form.FormBorderStyle = 'Fixed3D' 
-        $new_form.Text = "Just do it all for me"
-        #insert code here
-        $new_form.ShowDialog()
-    })
-    $main_form.Controls.Add($Button69)
+    $CreateButton = Create-Button -Name "Create" -xCoord 300 -yCood 500
+    $CreateButton.Size = '75,23'
+    $CreateButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+    $main_form.AcceptButton = $CreateButton
+    $main_form.Controls.Add($CreateButton)
+
+    $CancelButton = Create-Button -Name Cancel -xCoord 450 -yCood 500
+    $CancelButton.Size = '75,23'
+    $CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+    $main_form.CancelButton = $CancelButton
+    $main_form.Controls.Add($CancelButton)
 
 
     $main_form.ShowDialog()
@@ -472,26 +225,38 @@ Function Create-Button{
 }
 
 Function Create-Label{
-    param($Text,$xCoord, $yCoord, $xSize, $ySize)
+    param($Text, $xCoord, $yCoord, $xSize, $ySize, $FontSize)
     $Label = New-Object System.Windows.Forms.Label
     $Label.Text = "$Text"
     $Label.AutoSize = $true
     $Label.Location  = New-Object System.Drawing.Point($xCoord,$yCoord)
     $Label.Size = New-Object System.Drawing.Size($xSize,$ySize)
-    $Label.font = New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontStyle]::Regular)
+    $Label.font = New-Object System.Drawing.Font("Arial",$FontSize,[System.Drawing.FontStyle]::Regular)
     $Label
     #$new_form.Controls.Add($Label)
 }
 
 Function Create-Textbox{
-    param($xCoord, $yCoord, $xSize, $ySize)
+    param($xCoord, $yCoord, $xSize, $ySize, $FontSize)
     $textBox = New-Object System.Windows.Forms.TextBox
     $textBox.Location = New-Object System.Drawing.Point($xCoord,$yCoord)
     $textBox.Size = New-Object System.Drawing.Size($xSize,$ySize)
     $textBox.AutoSize = $true
-    $textBox.font = New-Object System.Drawing.Font("Arial",14,[System.Drawing.FontStyle]::Regular)
+    $textBox.font = New-Object System.Drawing.Font("Arial",$FontSize,[System.Drawing.FontStyle]::Regular)
     $textBox
     #$new_form.Controls.Add($textBox)
+}
+
+Function Create-RadioButton{
+    param($Text, $xCoord, $yCoord)
+    $RadioButton = New-Object System.Windows.Forms.RadioButton
+    $RadioButton.Location = New-Object System.Drawing.Point($xCoord,$yCoord)
+    $RadioButton.size = '350,20'
+    #$RadioButton.Checked = $true 
+    $RadioButton.Text = "$Text"
+    $RadioButton.Font = New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontStyle]::Regular) 
+    $RadioButton
+    #$new_form.Controls.Add($RadioButton)
 }
 
 Test-GUI
