@@ -262,8 +262,13 @@ ParkRouter(config-router)area area-id range ip-address mask
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
  | OSPF preference of route |
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- Increase cost of one interface in ospf compaered to one another in
+ Increase cost of one interface in ospf compared to one another in
  order for OSPF to prefer that route
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Enabling a Layer 2 Port to Layer 3 (for setting an ip address)|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config-if) no switchport
+# enables layer 3 functionality on a layer 2 port if layer 3 is supported.
  ~~~~~~~~~~~~~~~~~~~~~~~~~
  | setting static routes |
  ~~~~~~~~~~~~~~~~~~~~~~
