@@ -229,7 +229,7 @@ ParkRouter(config-router)default-information originate
 ~~~~~~~~~~~~~~~~~~~~~
 | Pinging Server|
 ~~~~~~~~~~~~~~~~~
-ParkRouter# pin 8.8.8.8 # shows wether the packets get there
+ParkRouter# ping 8.8.8.8 # shows wether the packets get there
 ~~~~~~~~~~~~~~~~~~~~~~
 | restricting vlans on a trunked port|
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -264,6 +264,14 @@ ParkRouter(config-router)area area-id range ip-address mask
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  Increase cost of one interface in ospf compared to one another in
  order for OSPF to prefer that route
+~~~~~~~~~~~~~~~~~~
+| OSPF show commands|
+~~~~~~~~~~~~~~~~~~~~
+Router# show ip ospf database // shows the OSPF database and its routes it has saved
+Router# show ip ospf neighbor // shows the direct neigbor of OSPF
+More found at : https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/ospf-s1.html
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Enabling a Layer 2 Port to Layer 3 (for setting an ip address)|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -286,7 +294,19 @@ ParkRouter(config-if) no switchport
  ParkRouter# show cdp neighbors // shows the neighbors that are using cdp
  ParkRouter# show cdp interface // shows wihich interfaces are using cdp
  more at : https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/cdp/configuration/15-mt/cdp-15-mt-book/nm-cdp-discover.html
-
+~~~~~~~~~~~~~~~~~~~~
+| debugging ping |
+~~~~~~~~~~~~~~~~~~
+ParkRouter#debug ip packet detail
+~~~~~~~~~~~~~~~~
+| Access lists|
+~~~~~~~~~~~~~~~
+ParkRouter(config) access-list [ACL number] [permir or deny] [source ip and mask] [destination ip and mask]
+if its is an extended ACL:
+  ParkRouter(config) access-list [ACL number] [permir or deny] [protocol(like ip or udp, tcp, etc)] [source ip and mask] [destination ip and mask] eq [Upper-level protocol, such as telnet (optional)]
+useful ACL commands:
+ParkRouter(config) access-list 102 deny ip any any 
+// denies all the ip's onn  a given access list, can be modified to suit your needs, just pay attention the "any any" portion
 
 
 
