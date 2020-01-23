@@ -274,7 +274,21 @@ ParkRouter(config-if) no switchport
  ~~~~~~~~~~~~~~~~~~~~~~
  ParkRouter(config)ip routing  // enables ip routing
  ParkRouter(config) ip route prefix mask ip-address
- 
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ | Check the routing table of a router|
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ParkRouter$ show ip route
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ | Cisco Discovery Protocol(CDP)|
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ParkRouter(config-if) cdp enable // enables CDP protocol on a given interface
+ // EXTREMELY usefull for knkowing what is connected on an interface or multiple interfaces
+ ParkRouter# show cdp neighbors // shows the neighbors that are using cdp
+ ParkRouter# show cdp interface // shows wihich interfaces are using cdp
+ more at : https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/cdp/configuration/15-mt/cdp-15-mt-book/nm-cdp-discover.html
+
+
+
 
 
 
