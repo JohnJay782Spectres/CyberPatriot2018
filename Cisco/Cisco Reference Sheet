@@ -303,11 +303,22 @@ ParkRouter#debug ip packet detail
 ~~~~~~~~~~~~~~~
 ParkRouter(config) access-list [ACL number] [permir or deny] [source ip and mask] [destination ip and mask]
 if its is an extended ACL:
-  ParkRouter(config) access-list [ACL number] [permir or deny] [protocol(like ip or udp, tcp, etc)] [source ip and mask] [destination ip and mask] eq [Upper-level protocol, such as telnet (optional)]
+  ParkRouter(config) access-list [ACL number] [permir or deny] [protocol(like ip or udp, tcp, etc)] [source ip and mask] [destination ip and mask] eq [Upper-level protocol, such as telnet (optional), or port]
 useful ACL commands:
 ParkRouter(config) access-list 102 deny ip any any 
+ParkRouter(config) no access-list [accesslist number] // deletes that acces liost number
+more : http://routeswitchlabtips.com/routing-and-switching/how-to-add-delete-and-renumber-a-cisco-access-control-list-acl/
 // denies all the ip's on  a given access list, can be modified to suit your needs, just pay attention the "any any" portion
+~~~~~~~~~~~~~~~~~~~~~~~
+Aplying Acess list
+~~~~~~~~~~~~~~~~~~~~~
+ParkRouter(config-if) ip access-group [acess-list number] [in or out] 
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Setting up a custom DNS Server IP on routers|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Router(config) ip name-server [ip of DNS]
+Optional: ip domain-lookup // enables the lookup for domains using the given DNS Ip ( check)
 
 
 
