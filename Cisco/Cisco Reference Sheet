@@ -306,7 +306,7 @@ if its is an extended ACL:
   ParkRouter(config) access-list [ACL number] [permir or deny] [protocol(like ip or udp, tcp, etc)] [source ip and mask] [destination ip and mask] eq [Upper-level protocol, such as telnet (optional)]
 useful ACL commands:
 ParkRouter(config) access-list 102 deny ip any any 
-// denies all the ip's onn  a given access list, can be modified to suit your needs, just pay attention the "any any" portion
+// denies all the ip's on  a given access list, can be modified to suit your needs, just pay attention the "any any" portion
 
 
 
