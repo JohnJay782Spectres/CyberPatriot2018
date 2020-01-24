@@ -326,8 +326,11 @@ ParkRouter(config-if) ip access-group [acess-list number] [in or out]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Object Groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-object-group network ACCOUNTING // creates the object group
-access-list 100 permit ip object-group ACCOUNTING any // Use it in place of the network or service in the access-control entry
+Router(config)object-group network ACCOUNTING // creates the object group
+Router(config-network-group) 192.168.10.0 255.255.255.0 // adds network to group
+Router(config-network-group) 192.168.20.0 255.255.255.0 // adds another network to group
+Router(config-netowkr-group) host 192.168.30.3 (adds a single IP to the network, rmemeber host= wildcard:0.0.0.0, subnet=255.255.255.255)
+Router(config-network-group)access-list 100 permit ip object-group ACCOUNTING any // Use it in place of the network or service in the access-control entry
 // used to control multiple networks over 1 access list
 // ACL can also be controlled by Time Ranges... NISD used this in 2020
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -338,6 +341,53 @@ Router(config-ext-nacl) deny ip 192.168.0 0.0.0.255 any // adds a rule to it
 Router(config-ext-nacl) permit ip any any // adds a rule to it
 Router(config-ext-nacl) int g0/0 interfaces with g0/0
 Router(config-if) ip access-group BLOCK_SALES out // applies the named ACL to interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Network Address Translation (NAT)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* This section will be structurd as Notes
+* Convertion goes both ways
+* interfaces have special names(relevant for test and for imaggining the concept) depending on the relationship and what router you are
+
+NAt has multiple methods of being arranged:
+1) Static 1 to 1:
+  *translates one public IP to one private address
+  instructions:
+  *Outward facing address: 209.165.100.29 (public IP)
+  *Inward facing address: 10.0.0.240 ( a server)
+  router(config) int g0/0 // interfaces with g0/0. which in this cases faces the WAN
+  router(config-if) ip nat out // tells NAT that this is the outward facing interface ( facing the WAN)
+  router(config-if) int g0/1 // interfaces with the LAN network ( your "inside" networ)
+  router(config-if) ip nat inside // tells NAT that this interfaces faces your LAN network
+  router(config-if) ip nat inside source static 10.0.0.240 209.165.100.29 //this tells the router to translate from 10.0.0.240 private IP to the 209.165.100.29 Public IP
+  // the above command finished the 1 to 1 translation, since it goes both ways
+2) Port Address Translation 1 to 1 Port 80:
+  *translates one public IP address to one private address based on a port ( in this case it is 80)
+  * also a 1 to 1 translation, but only happens if you contact the public IP address on the specified port (port 80 in this case )
+  instructions:
+  *Outward facing address: 209.165.100.30 (public IP)
+  *Inward facing address: 10.0.0.250 (a web server)
+  router(config) int g0/0 // interfaces with g0/0. which in this cases faces the WAN
+  router(config-if) ip nat outside // tells NAT that this is the outward facing interface ( facing the WAN)
+  router(config-if) int g0/1 // interfaces with the LAN network ( your "inside" networ)
+  router(config-if) ip nat inside // tells NAT that this interfaces faces your LAN network
+    * the above commands are if you have not already set up outside/inside connections
+  router(config) ip nat inside source static tcp 10.0.0.250 80 209.165.100.30 80 //translates the private 10.0.0.250 port 80 to the 209.165.100.30 port 80 public ip using trp protocol
+  // the above command finished the port address translation based on port 80 with the tcp protocol  
+3) NAT Overload Translation(PAT):
+  * Most common form of translation, commonly found in home routers
+  * Takes a public address and it gets translated to all the private addresses on the private network
+  * also converts all private addresses to one public address
+  instuctions:
+  
+
+4) Dynamic Translation (NAT Pool):
+  * When you have multiple Public addresses and they get converted to a bunch of private addresses
+  * This type of NAT was used in the 2020 Cisco State competition
+  instructions:
+
+
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting up a custom DNS Server IP on routers|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
