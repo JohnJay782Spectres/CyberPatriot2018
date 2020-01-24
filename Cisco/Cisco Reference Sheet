@@ -347,8 +347,8 @@ Network Address Translation (NAT)
 * This section will be structurd as Notes
 * Convertion goes both ways
 * interfaces have special names(relevant for test and for imaggining the concept) depending on the relationship and what router you are
-
-NAt has multiple methods of being arranged:
+router(config) show ip nat translation //shows you the nat translations done by the router 
+NAT has multiple methods of being arranged:
 1) Static 1 to 1:
   *translates one public IP to one private address
   instructions:
@@ -375,17 +375,35 @@ NAt has multiple methods of being arranged:
   // the above command finished the port address translation based on port 80 with the tcp protocol  
 3) NAT Overload Translation(PAT):
   * Most common form of translation, commonly found in home routers
-  * Takes a public address and it gets translated to all the private addresses on the private network
+  * Takes a public address and it gets translated to all the private addresses on the private network, one to many, many to one
   * also converts all private addresses to one public address
   instuctions:
-  
-
+  *Outward facing address: 209.165.100.30 (public IP)
+  *Inward facing address: 10.0.0.100 (a PC)
+  router(config) int g0/0 // interfaces with g0/0. which in this cases faces the WAN
+  router(config-if) ip nat outside // tells NAT that this is the outward facing interface ( facing the WAN)
+  router(config-if) int g0/1 // interfaces with the LAN network ( your "inside" networ)
+  router(config-if) ip nat inside // tells NAT that this interfaces faces your LAN network
+    * the above commands are if you have not already set up outside/inside connections
+  router(config)access-list 10 permit 10.0.0.0 0.0.0.255 // sets up an (standard) access list to define what private addresses are permited 
+    * use ip nat inside source ? in order to get a list of the available options for the command ( list or static)
+  router(config)ip nat inside source list 10 interface g0/0 overload // Translates whatever is on access list 10 to the public IP on g0/0, overload uses ports in order to be able to translates all multiple private addresses into 1 public address
+    * use ip nat inside source list 10 ? to get help with the options, in this case this accepts an interface or a pool of ip addresses
+    * the above command finishes the NAT setup
 4) Dynamic Translation (NAT Pool):
   * When you have multiple Public addresses and they get converted to a bunch of private addresses
   * This type of NAT was used in the 2020 Cisco State competition
   instructions:
-
-
+  * Global Addresses: 209.165.100.17-24/28, has multiple routers available to it
+  * Inside Address: 192.168.1.1/24, notice this are networks, not just IP's...
+  router(config) int g0/0 // interface facing WAN (outside)
+  router(config-if) ip nat out // tells NAT that this interface faces WAN
+  router(config-if) int g0/1 // interface facing the LAN (inside)
+  router(config-if) ip nat inside // tells NAT that this interface faces inside
+  router(config-if) access-list 1 permit 192.168.1.0 0.0.0.255 // adds the private network to a 'normal' access list
+  router(config) ip nat pool MYPOOL 209.165.100.17 209.165.100.24 netmask 255.255.255.240 // sets up a NAT pool with a start ip of 209.165.100.17 and ending IP of 209.165.100.24 with a mask of 255.255.255.240 (/27)
+  router(config) ip nat inside source list 1 pool MYPOOL overload // sets up the NAT using the private IP networks stated on access list 1 to be translated to the public network IP pool(MYPOOL) as well as using the overload keyword in order to use ports if private addresses are too many for the available public IP network.
+  // the command above finishes the NAT setup
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
