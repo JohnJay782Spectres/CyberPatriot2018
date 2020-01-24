@@ -301,24 +301,61 @@ ParkRouter#debug ip packet detail
 ~~~~~~~~~~~~~~~~
 | Access lists|
 ~~~~~~~~~~~~~~~
-ParkRouter(config) access-list [ACL number] [permir or deny] [source ip and mask] [destination ip and mask]
-if its is an extended ACL:
-  ParkRouter(config) access-list [ACL number] [permir or deny] [protocol(like ip or udp, tcp, etc)] [source ip and mask] [destination ip and mask] eq [Upper-level protocol, such as telnet (optional), or port]
+if its a standard ACL (number: 0-99 or 1300-1999) access list:
+ParkRouter(config) access-list [ACL number] [permir or deny] [source ip and mask] [destination ip and  wildcard mask]
+if its is an extended ACL(number 100-199 or 2000-2699):
+  ParkRouter(config) access-list [ACL number] [permir or deny] [protocol(like ip or udp, tcp, etc)] [source ip and wildcard mask] [destination ip and wildcard mask] eq [Upper-level protocol, such as telnet (optional), or port]
 useful ACL commands:
-ParkRouter(config) access-list 102 deny ip any any 
+ParkRouter(config) access-list 102 deny ip any any // or ...permit any any
 ParkRouter(config) no access-list [accesslist number] // deletes that acces liost number
+ParkRouter(config) access-list 100 deny tcp 10.3.0.0 0.0.255.255 host 10.1.0.1 // denies tcp traffic on port 23 from the 10.3.0.0/16 network to the 10.1.0.1 destination 
+            * in the above command host stands for a wildcard mask of 0.0.0.0 (means match the exact IP for the rule to apply, normal subnet would be: 255.255.255.255)
+Router(config) access-list ? // shows the access list available
+Router# show access-list // shows the configured access lists
+Notes:
+  Acccess Lists have an implicit deny, hence, they need a permit statement to allow any traffic thru 
+  They apply rules from top to bottom, so put stricter rules at top.
 more : http://routeswitchlabtips.com/routing-and-switching/how-to-add-delete-and-renumber-a-cisco-access-control-list-acl/
 // denies all the ip's on  a given access list, can be modified to suit your needs, just pay attention the "any any" portion
-~~~~~~~~~~~~~~~~~~~~~~~
-Aplying Acess list
-~~~~~~~~~~~~~~~~~~~~~
+The "remark" keyword adds a comment to the ACL, 
+  ex: access-list 10 remark Block Topeka Office
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Aplying Access list to an interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ParkRouter(config-if) ip access-group [acess-list number] [in or out] 
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Object Groups
+~~~~~~~~~~~~~~~~~~~~~~~~~
+object-group network ACCOUNTING // creates the object group
+access-list 100 permit ip object-group ACCOUNTING any // Use it in place of the network or service in the access-control entry
+// used to control multiple networks over 1 access list
+// ACL can also be controlled by Time Ranges... NISD used this in 2020
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Named Access Lists
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Router(config)ip access-list extended BLOCK SALES  // creates a named ACL with name BLOCK BLOCK SALES
+Router(config-ext-nacl) deny ip 192.168.0 0.0.0.255 any // adds a rule to it
+Router(config-ext-nacl) permit ip any any // adds a rule to it
+Router(config-ext-nacl) int g0/0 interfaces with g0/0
+Router(config-if) ip access-group BLOCK_SALES out // applies the named ACL to interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 | Setting up a custom DNS Server IP on routers|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Router(config) ip name-server [ip of DNS]
 Optional: ip domain-lookup // enables the lookup for domains using the given DNS Ip ( check)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Showing the Ip address of interfaces|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Router# show ip int brief // shows the interfaces and their IP's, brief can be redacted for more details
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Random Interesting Command (Miscallenous)|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Router(config) do show access-list // shows the access lists as if from  off config mode (maybe the "do" keyword?)
+ Note:The "do" keyword makes the command as if from the "Router#"
+ menu(terminal) menu, hence any command that works in such menu
+ will work in config mode if preceeded by the "do" command.
+
 
 
 
