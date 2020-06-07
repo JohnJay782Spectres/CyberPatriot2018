@@ -4,14 +4,22 @@ honestly, many times do not make sense. But, do not fear, for this "chapter" is 
 will help you in the competition and in understanding the world of networking. The very first concept we will talk is one that is
 pivotal to every computer in the world: binary.
 
-Binary, the ones and zeroes want the ring...
+Binary, (the ones and zeroes want the ring guys...)
 Well, what is binary!?, such a strange word that I have not heard of before (insert confused laughing noises). Worry not, for the
-concept is actually quite simple. One of the meanings of the word is "involving two". In the case of computer science this word
-refers to the base 2 numerical system computers use, the literal ones and zeroes the computer uses to interpret, store and process
-all the data it has. Without binary a computer would not even be a computer, since it uses binary for EVERYTHING, literally from the
-word you see on this screen to the music you hear can be represented as a long string(gotcha to those who know programming) of ones 
-and zeroes. For example the word A can be represented as: 01000001, the ones and zeroes you see there are the ASCII representation
+concept is actually quite simple. One of the meanings of the word is "involving two". In the case of computer science, this word
+refers to the base 2 numerical system computers use, the system of literal ones and zeroes the computer uses to interpret, store and 
+process all the data it has. Without binary a computer would not even be a computer, since it uses binary for EVERYTHING, literally from 
+the word you see on this screen to the music you hear can be represented as a long string(gotcha to those who know programming) of ones 
+and zeroes. For example the word 'A' can be represented as: 01000001, the ones and zeroes you see there are the ASCII representation
 of the letter 'A'. From the previous example the long string of zeroes and ones you see is binary, all it is a way is a bunch of zeroes
-and ones that computers use to represent ANY data they have, take the binary out of a computer and you don't have a computer (unless u
-are OP and code one to use a different system, any takers for this idea?).
+and ones that computers use to represent ANY data they have, take the binary out of a computer and you don't have a computer (unless you
+are a 'Master Hacker'and make one that uses a different system, any takers for this idea?).
 
+The 'system' of binary (The HEX of the BYTE is out to get me guys...)
+Now, we finally know what the binary system is, HORAYYY!. That is just the beginning, it is now important to know how the system works,
+and we will first start with it's classification:
+  -One individual one or zero is called a 'bit'
+  -Eigth 'bits' make one 'byte'
+  -One thousand 'bites' make one kilobyte
+  -One thousand 'kilobytes' make one 'Megabyte' 
+  -One thousand 'Megabytes' makes one 'Gygabyte'
