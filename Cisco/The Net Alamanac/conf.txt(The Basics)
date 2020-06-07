@@ -1,0 +1,9 @@
+Okay, well, If you are reading this file I am assuming you know nothing, or very little about the world of networking and
+how it works. That is okay, the world you are about to enter is vast and complicated, filled with terms and acronyms that,
+honestly, many times do not make sense. But, do not fear, for this "chapter" is intended to introduce the basic concepts that
+will help you in the competition and in understanding the world of networking. The very first concept we will talk is one that is
+pivotal to every computer in the world: binary.
+
+Well, what is binary!?, such a strange word that I have not heard of before (insert confused laughing noises). Worry not, for the
+concept is actually quite simple. One of the meanings of the word is "involving two". In the case of computer science this word
+refers to the base 2 numerical system computers use, the literal one
