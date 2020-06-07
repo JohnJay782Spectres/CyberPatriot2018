@@ -1,1 +1,15 @@
+Well. So I've decided to write a guide to future Networking Members... hope it is usefull as this will be a collection of what I know
+about networking and what resources you can use to further your knowledge, As time passes I will keep adding to this guide (until I 
+no longer can).
 
+Now, this document, or assembly of documents is NOT meant to teach you the full breath of the networking field, for it is large and vast
+and my knowledge of it at this time is incomplete. BUT, it is meant to be an aid for what will, at first, be a hard task, but with 
+practice and dedication will become much easier.
+
+This Alamanac wil be ordered in various categories, of which they will hopefully be self explanatory, in any case it is advisable to read
+or do them in order.
+
+~~~A note to future members of the Networking Team~~~
+Feel free to add and update this document, let it be a living document that grows with each member.
+
+-Scott (Imperious)
